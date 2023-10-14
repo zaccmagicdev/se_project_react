@@ -1,0 +1,35 @@
+.header{
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.header__container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
+}
+
+.header__date-time{
+    margin: 0;
+}
+
+.header__add-items-bttn{
+    border: none;
+    font-family: 'Cabinet Grotesk';
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.header__profile-icon{
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    background-position: center;
+    border: 1px solid grey;
+}
