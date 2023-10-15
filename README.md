@@ -1,8 +1,15 @@
 # WTWR (What to Wear?)
 
-## About the project
+## About this project
 
-The idea of the application is pretty simple - we make a call to an API, which then responds with the daily weather forecast. We collect the weather data, process it, and then based on the forecast, we recommend suitable clothing to the user.
+This is a simple little project that will retreive the weather and reccomend what to wear according to said weather. MOBILE VERSION WILL BE COMING SOON!
+
+## Technologies Used:
+
+- React.js
+- JSX
+- Backend development coming soon!
+- Cuurently optimized for desktop but responsive design will follow shortly
 
 ## Links
 

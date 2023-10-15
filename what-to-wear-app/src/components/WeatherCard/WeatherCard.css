@@ -1,0 +1,17 @@
+.weathercard{
+    /*this will eventually be rewritten to properly resize for responsive implimentation*/
+    margin-top: 28px;
+    background-image: url(../../images/Group\ 120.png);
+    background-size: cover;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.weathercard__temp{
+    color: white;
+    font-size: 36px;
+    font-weight: 700;
+    margin-left: 16px;
+}
