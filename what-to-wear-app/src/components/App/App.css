@@ -6,7 +6,42 @@
 
 .App{
     font-family: 'Cabinet Grotesk', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
     height: 100vh;
     max-width: 1360px;
     margin: auto;
+}
+
+.clothing__modal-input{
+    border: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+    font-family: 'Cabinet Grotesk', Arial, sans-serif;
+    font-size: 16px;
+}
+
+.clothing__modal-label-radio{
+    display: flex;
+    flex-direction: column;
+}
+
+.clothing__modal-radio-name{
+    color: rgba(0, 0, 0, 0.5)
+}
+
+.clothing__modal-radio-btn{
+    accent-color: black;
+}
+
+.clothing__modal-radio-btn:checked + span{
+    color: black;
+}
+
+ul{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 328px);
+    gap: 16px;
+    padding: 0px;
 }

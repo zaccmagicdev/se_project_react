@@ -1,14 +1,14 @@
 .itemcard{
-    border: none;
+    border: 1px solid grey;
     border-radius: 10px;
     height: 328px;
     width: 328px;
     display: flex;
     justify-content: center;
     cursor: pointer;
-    background-image: url(../../images/test-img.jpg);
     background-position: center;
     background-size: cover;
+    padding: 0px;
 }
 
 .itemcard__name-wrapper{

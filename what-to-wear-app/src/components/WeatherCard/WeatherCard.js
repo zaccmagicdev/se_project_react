@@ -1,10 +1,11 @@
 import React from "react";
 import './WeatherCard.css'
 
-function WeatherCard(){
+//here we will want to add props to take in the API output
+function WeatherCard(props){
    return(
     <div className="weathercard">
-        <div className="weathercard__temp">75°F</div>
+        <div className="weathercard__temp">{props.temp}</div>
     </div>
    );    
 }

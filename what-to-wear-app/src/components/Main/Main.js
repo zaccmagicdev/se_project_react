@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import WeatherCard from "../WeatherCard/WeatherCard";
-import ItemCard from "../ItemCard/ItemCard";
+import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import './Main.css';
 
-function Main() {
+function Main(props) {
+
     return (
-        <div>
-            <WeatherCard />
+        <div> 
+            <WeatherCard temp="74F" />
+            <p>Today is {props.temp}, you may want to wear:</p>
+            {props.children}
         </div>
     );
 }

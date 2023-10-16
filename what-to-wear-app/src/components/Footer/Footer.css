@@ -1,0 +1,6 @@
+.footer__container{
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 500;
+}
