@@ -16,8 +16,10 @@ function Main(props) {
         }
     }
 
+    const weatherType = getWeatherType(props.temp);
+
     const filteredCards = defaultClothingItems.filter((item) => {
-        if(item.weather === getWeatherType(props.temp)){
+        if(item.weather === weatherType){
             return item;
         }
     });

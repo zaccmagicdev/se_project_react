@@ -12,21 +12,10 @@ import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import Footer from "../Footer/Footer";
 import ItemModal from "../ItemModal/ItemModal";
-import { apiKey } from "../../utils/constants";
+import weatherAPI from "../../utils/weatherAPI";
 
 function App() {
     
-    async function apiCall() {
-        return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=32.71536&lon=-117.1573&units=imperial&appid=${apiKey}`)
-            .then((res) => {
-                if (res.ok) {
-                    return res.json();
-                } else {
-                    return Promise.reject(`Error: ${res.status}`);
-                }
-            });
-    }
-
     const [activeModal, setActiveModal] = useState("");
     const [selectedCard, setSelectedCard] = useState({});
     const [temp, setTemp] = useState(0);
@@ -46,11 +35,11 @@ function App() {
     };
 
     useEffect(() => {
-        apiCall().then((res) => {
+        weatherAPI().then((res) => {
             setTemp(Math.round(res.main.temp));
             setCity(res.name);
-        });
-    });
+        }).catch(err => console.log(err));
+    },[]);
 
     return (
         <div className="App">
@@ -70,15 +59,15 @@ function App() {
                     <label className="clothing__modal-label-radio">
                         Select the weather type:
                         <label className="clothing__modal-radio-name">
-                            <input className="clothing__modal-radio-btn" type="radio"></input>
+                            <input className="clothing__modal-radio-btn" type="radio" name="hot"></input>
                             <span>Hot</span>
                         </label>
                         <label className="clothing__modal-radio-name">
-                            <input className="clothing__modal-radio-btn" type="radio"></input>
+                            <input className="clothing__modal-radio-btn" type="radio" name="warm"></input>
                             <span>Warm</span>
                         </label>
                         <label className="clothing__modal-radio-name">
-                            <input className="clothing__modal-radio-btn" type="radio"></input>
+                            <input className="clothing__modal-radio-btn" type="radio" name="cold"></input>
                             <span>Cold</span>
                         </label>
                     </label>
