@@ -5,42 +5,59 @@
 //we will also call our api here for the weather and transfer that info
 //via class decentiom
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Header/Header";
 import './App.css';
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import DefaultItems from "../../utils/DefaultItems";
 import Footer from "../Footer/Footer";
-import ItemCard from "../ItemCard/ItemCard";
+import ItemModal from "../ItemModal/ItemModal";
+import { apiKey } from "../../utils/constants";
 
 function App() {
+    
+    async function apiCall() {
+        return fetch(`https://api.openweathermap.org/data/2.5/weather?lat=32.71536&lon=-117.1573&units=imperial&appid=${apiKey}`)
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    return Promise.reject(`Error: ${res.status}`);
+                }
+            });
+    }
 
-    const [activeModal, setActiveModal] = useState(false);
-    const [cards, setCards] = useState([]);
+    const [activeModal, setActiveModal] = useState("");
+    const [selectedCard, setSelectedCard] = useState({});
+    const [temp, setTemp] = useState(0);
+    const [city, setCity] = useState("");
 
-    const handleCreateModal = () => {
-        setActiveModal(true)
+    const handleOpenModal = () => {
+        setActiveModal("form")
     };
 
     const handleCloseModal = () => {
-        setActiveModal(false);
+        setActiveModal("");
     };
+
+    const selectCard = (card) => {
+        setActiveModal("image");
+        setSelectedCard(card);
+    };
+
+    useEffect(() => {
+        apiCall().then((res) => {
+            setTemp(Math.round(res.main.temp));
+            setCity(res.name);
+        });
+    });
 
     return (
         <div className="App">
-            <Header location="San Diego" handleClick={handleCreateModal} />
-            <Main>
-                <ul>
-                    <ItemCard name="Hat" link="https://i.ebayimg.com/thumbs/images/g/yT8AAOSwCctktK1~/s-l640.jpg"></ItemCard>
-                    <ItemCard name="Jersey" link="https://i.ebayimg.com/images/g/Qq0AAOSwG59jrLZv/s-l1200.webp"></ItemCard>
-                    <ItemCard name="Hat" link="https://i.ebayimg.com/thumbs/images/g/yT8AAOSwCctktK1~/s-l640.jpg"></ItemCard>
-                    <ItemCard name="Hat" link="https://i.ebayimg.com/thumbs/images/g/yT8AAOSwCctktK1~/s-l640.jpg"></ItemCard>
-                    
-                </ul>
-            </Main>
+            <Header location={city} handleClick={handleOpenModal} />
+            <Main temp={temp} handleOpenModal={selectCard} />
             <Footer />
-            {activeModal && (
+            {activeModal === "form" && (
                 <ModalWithForm title="New Garment" name="clothing" buttonName="Add garment" onClose={handleCloseModal}>
                     <label>
                         Name
@@ -66,6 +83,9 @@ function App() {
                         </label>
                     </label>
                 </ModalWithForm>
+            )}
+            {activeModal === "image" && (
+                <ItemModal link={selectedCard.link} name={selectedCard.name} temp={selectedCard.weather} onClose={handleCloseModal} />
             )}
         </div>
     );

@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Cabinet Grotesk';
     font-style: normal;
-    src: url('../../fonts/CabinetGrotesk-Medium.woff');
+    src: url('../../vendor/fonts/CabinetGrotesk-Medium.woff');
 }
 
 .App{
@@ -37,11 +37,4 @@
 
 .clothing__modal-radio-btn:checked + span{
     color: black;
-}
-
-ul{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 328px);
-    gap: 16px;
-    padding: 0px;
 }

@@ -35,4 +35,8 @@ const defaultClothingItems = [
       weather: "cold",
       link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Coat.png?etag=298717ed89d5e40b1954a1831ae0bdd4",
     }
-  ]
+  ];
+
+  const apiKey = "bb1a34b30e91f6493febc3872715ffc5";
+
+  export {apiKey, defaultClothingItems};

@@ -5,7 +5,7 @@ import './WeatherCard.css'
 function WeatherCard(props){
    return(
     <div className="weathercard">
-        <div className="weathercard__temp">{props.temp}</div>
+        <div className="weathercard__temp">{props.temp}°F</div>
     </div>
    );    
 }

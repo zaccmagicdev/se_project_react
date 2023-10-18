@@ -12,16 +12,20 @@
 }
 
 .itemcard__name-wrapper{
-    width: 72px;
+    max-width: 100px;
+    padding: 2px;
     height: 24px;
     border-radius: 5px;
     background-color: white;
     margin-top: 15px;
     display: flex;
     align-items: center;
+    white-space: nowrap;
 }
 
 .itemcard__name{
     margin: auto;
     font-size: 16px;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.6);
 }

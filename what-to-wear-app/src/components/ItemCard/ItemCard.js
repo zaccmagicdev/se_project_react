@@ -10,7 +10,7 @@ function ItemCard(props){
     };
 
     return(
-        <button className='itemcard' style={cardImage} onClick={props.handleCardOpen}>
+        <button className='itemcard' style={cardImage} onClick={() => props.handleCardOpen(props)}>
             <div className='itemcard__name-wrapper'>
                 <p className='itemcard__name'>{props.name}</p>
             </div>

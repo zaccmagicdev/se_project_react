@@ -1,0 +1,6 @@
+ul{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 328px);
+    gap: 16px;
+    padding: 0px;
+}
