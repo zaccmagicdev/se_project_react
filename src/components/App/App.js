@@ -1,3 +1,4 @@
+'use strict';
 //for the resposive design we can make the clothing components a grid
 //layout and made the widest components equal the percentage of the
 //screens viewwidth
@@ -15,11 +16,17 @@ import ItemModal from "../ItemModal/ItemModal";
 import weatherAPI from "../../utils/weatherAPI";
 
 function App() {
-    
+
+    //API hooks and functionality hooks
     const [activeModal, setActiveModal] = useState("");
     const [selectedCard, setSelectedCard] = useState({});
     const [temp, setTemp] = useState(0);
     const [city, setCity] = useState("");
+    const [weather, setWeather] = useState("");
+    const [sunrise, setSunrise] = useState(0);
+    const [sunset, setSunset] = useState(0);
+    const [tempHigh, setHighTemp] = useState(0);
+    const [tempLow, setLowTemp] = useState(0);
 
     const handleOpenModal = () => {
         setActiveModal("form")
@@ -38,13 +45,18 @@ function App() {
         weatherAPI().then((res) => {
             setTemp(Math.round(res.main.temp));
             setCity(res.name);
+            setWeather(res.weather[0].main);
+            setSunrise(res.sys.sunrise);
+            setSunset(res.sys.sunset);
+            setHighTemp(Math.round(res.main.temp_max));
+            setLowTemp(Math.round(res.main.temp_min));
         }).catch(err => console.log(err));
     },[]);
 
     return (
         <div className="App">
             <Header location={city} handleClick={handleOpenModal} />
-            <Main temp={temp} handleOpenModal={selectCard} />
+            <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} highTemp={tempHigh} lowTemp={tempLow}/>
             <Footer />
             {activeModal === "form" && (
                 <ModalWithForm title="New Garment" name="clothing" buttonName="Add garment" onClose={handleCloseModal}>

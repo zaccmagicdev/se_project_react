@@ -1,12 +1,14 @@
 .weathercard{
     /*this will eventually be rewritten to properly resize for responsive implimentation*/
     margin-top: 28px;
-    background-image: url(../../images/Group\ 120.png);
     background-size: cover;
     height: 80px;
     width: 100%;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .weathercard__temp{
@@ -14,4 +16,21 @@
     font-size: 36px;
     font-weight: 700;
     margin-left: 16px;
+}
+
+.weathercard__wrapper{
+    position: absolute;
+}
+
+.weathercard__hiandlow{
+    position: relative;
+    left: 100px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+.weathercard__icon{
+    bottom: 16px;
+    height: 100%;
+    border-radius: 10px;
 }

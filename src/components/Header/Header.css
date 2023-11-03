@@ -32,3 +32,13 @@
     background-position: center;
     border: 1px solid grey;
 }
+
+.header__mobile-button{
+    box-sizing: border-box;
+    width: 44px;
+    height: 44px;
+    box-shadow: 1px 2px 15px 1px rgba(130,130,130,0.3);
+    border: none;
+    border-radius: 10px;
+    background: url(../../images/Group\ 158.svg) no-repeat center;
+}
