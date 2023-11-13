@@ -25,8 +25,6 @@ function App() {
     const [weather, setWeather] = useState("");
     const [sunrise, setSunrise] = useState(0);
     const [sunset, setSunset] = useState(0);
-    const [tempHigh, setHighTemp] = useState(0);
-    const [tempLow, setLowTemp] = useState(0);
 
     const handleOpenModal = () => {
         setActiveModal("form")
@@ -48,15 +46,13 @@ function App() {
             setWeather(res.weather[0].main);
             setSunrise(res.sys.sunrise);
             setSunset(res.sys.sunset);
-            setHighTemp(Math.round(res.main.temp_max));
-            setLowTemp(Math.round(res.main.temp_min));
         }).catch(err => console.log(err));
     },[]);
 
     return (
         <div className="App">
             <Header location={city} handleClick={handleOpenModal} />
-            <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} highTemp={tempHigh} lowTemp={tempLow}/>
+            <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset}/>
             <Footer />
             {activeModal === "form" && (
                 <ModalWithForm title="New Garment" name="clothing" buttonName="Add garment" onClose={handleCloseModal}>

@@ -29,3 +29,10 @@
     font-weight: 700;
     color: rgba(0, 0, 0, 0.6);
 }
+
+@media(max-width: 425px){
+    .itemcard{
+        height: 164px;
+        width: 164px;
+    }   
+}

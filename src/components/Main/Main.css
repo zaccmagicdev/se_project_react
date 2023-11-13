@@ -3,4 +3,12 @@ ul{
     grid-template-columns: repeat(auto-fit, 328px);
     gap: 16px;
     padding: 0px;
+    width: 100%;
+    justify-content: center;
+}
+
+@media(max-width: 425px){
+    ul{
+        grid-template-columns: repeat(auto-fit, 164px);
+    }   
 }

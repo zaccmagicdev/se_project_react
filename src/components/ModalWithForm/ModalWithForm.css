@@ -12,7 +12,7 @@
     background-color: white;
     box-sizing: border-box;
     margin: 195px auto;
-    width: 496px;
+    max-width: 496px;
     height: 436px;
     border-radius: 10px;
     color: black;
@@ -23,10 +23,7 @@
 
 .modal__title{
     font-size: 16px;
-}
-
-.modal__btn-wrapper{
-    position: relative;
+    margin-bottom: 37px;
 }
 
 .modal__close-btn{
@@ -35,7 +32,7 @@
     border: none;
     box-sizing: border-box;
     background: transparent url(../../images/close-icon.svg) center no-repeat;
-    position: absolute;
+    margin-left: auto;
     left: 414px;
     bottom: 18px;
     cursor: pointer;
@@ -63,10 +60,12 @@
     cursor: pointer;
 }
 
-.modal__form-submit-disabled{
-    
-}
-
 .modal__form-submit:hover{
     background: rgba(0, 0, 0, 0.6);
+}
+
+@media(max-width: 425px){
+    .modal__form-submit{
+        width: 100%;
+    }
 }

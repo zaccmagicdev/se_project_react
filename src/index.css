@@ -2,3 +2,9 @@ body{
     background-color: #F3F3F3;
     margin: 32px 40px;
 }
+
+@media(max-width: 425px){
+    body{
+        margin: 18px 16px;
+    }
+}

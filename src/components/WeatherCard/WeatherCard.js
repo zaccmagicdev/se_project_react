@@ -16,9 +16,6 @@ function WeatherCard(props){
         return(
             <div className="weathercard" style={{background: background[0].color}}>
                 <div className="weathercard__temp">{props.temp}°F</div>
-                <div className="weathercard__wrapper">
-                    <div className="weathercard__hiandlow">High: {props.highTemp}°F Low: {props.lowTemp}°F</div>
-                </div>
                 <img className="weathercard__icon" src={background[0].url} ></img>
             </div>
            );    

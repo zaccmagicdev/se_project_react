@@ -9,39 +9,38 @@
 }
 
 .itemmodal__container{
-    background-color: white;
+    background-color: #E9E9E9;
     box-sizing: border-box;
     margin: 195px auto;
     max-width: 498px;
-    height: 610px;
+    max-height: 610px;
     border-radius: 10px;
     color: black;
     display: flex;
     flex-direction: column;
 }
 
-.itemmodal__btn-wrapper{
-    position: relative;
-}
-
 .itemmodal__close-btn{
-    height: 20px;
     width: 20px;
+    min-height: 20px;
     border: none;
     box-sizing: border-box;
     background: transparent url(../../images/close-icon.svg) center no-repeat;
-    position: absolute;
-    left: 457px;
-    top: 17px;
     cursor: pointer;
+    margin: 12px 12px 0px auto;
+    display: block;
 }
 
 .itemmodal__img{
-    height: 498px;
+    max-height: 498px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 
 .itemmodal__caption-box{
     padding-left: 32px;
+    height: auto;
+    background-color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
