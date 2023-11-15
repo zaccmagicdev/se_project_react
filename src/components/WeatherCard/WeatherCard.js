@@ -7,7 +7,6 @@ import { backgrounds } from "../../utils/constants";
 
 function WeatherCard(props){
 
-    
     if(props.weather !== ""){
         const background = backgrounds.filter((i) => {
             return i.timeOfDay === props.time && i.weather === props.weather;
@@ -15,7 +14,7 @@ function WeatherCard(props){
 
         return(
             <div className="weathercard" style={{background: background[0].color}}>
-                <div className="weathercard__temp">{props.temp}°F</div>
+                <div className="weathercard__temp">{props.temp}</div>
                 <img className="weathercard__icon" src={background[0].url} ></img>
             </div>
            );    
@@ -23,3 +22,4 @@ function WeatherCard(props){
 }
 
 export default WeatherCard;
+

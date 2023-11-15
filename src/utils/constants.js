@@ -51,7 +51,8 @@ const defaultClothingItems = [
     {url: require("../images/Group 151.svg").default, timeOfDay: "night", weather: "Mist", color: "rgba(40, 104, 151, 1)"},
     {url: require("../images/Group 152.svg").default, timeOfDay: "night", weather: "Rain", color: "rgba(40, 104, 151, 1)"},
     {url: require("../images/Group 153.svg").default, timeOfDay: "night", weather: "Snow", color: "rgba(40, 104, 151, 1)"},
-    {url: require("../images/Group 154.svg").default, timeOfDay: "night", weather: "Thunderstorm", color: "rgba(40, 104, 151, 1)"}
+    {url: require("../images/Group 154.svg").default, timeOfDay: "night", weather: "Thunderstorm", color: "rgba(40, 104, 151, 1)"},
+    {url: require("../images/Group 151.svg").default, timeOfDay: "night", weather: "Haze", color: "rgba(40, 104, 151, 1)"},
 ];
 
 //we can rewrite the weather card as containers with the appropriate vector groups on the right and picking the color depending on the weather/time of day

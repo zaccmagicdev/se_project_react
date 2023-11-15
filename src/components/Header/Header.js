@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
 import HeaderLogo from '../../images/HeaderLogo.svg';
 import ProfileImage from '../../images/profile-img.jpg';
 import './Header.css';
@@ -49,6 +50,7 @@ function Header(props){
                 <p className = "header__date-time">{currentDate}, {props.location}</p>
             </div>
             <div className = 'header__container'>
+                <ToggleSwitch />
                 <button className = "header__add-items-bttn" onClick={props.handleClick}>+ Add clothes</button>
                 <p className = "header__username">Brock Purdy</p>
                 <img className = "header__profile-icon" src={ProfileImage} alt='Profile Image'/>
