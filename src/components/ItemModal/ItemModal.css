@@ -37,8 +37,24 @@
     border-top-right-radius: 10px;
 }
 
+.itemmodal__wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+.itemmodal__delete-button{
+   left: 1390px;
+   bottom: 550px;
+   border: none;
+   font-family: 'Cabinet Grotesk';
+   color: rgba(255, 77, 0, 1);
+   font-size: 20px;
+   background-color: white;
+   cursor: pointer;
+}
+
 .itemmodal__caption-box{
-    padding-left: 32px;
+    padding: 0px 32px 0px 32px;
     height: auto;
     background-color: white;
     border-bottom-left-radius: 10px;

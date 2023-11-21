@@ -1,0 +1,31 @@
+.clothessection__wrapper{
+    display: flex;
+    height: 25px;
+    box-sizing: border-box;
+}
+
+.clothessection__title{
+    font-size: 20px;
+    margin: 0;
+    box-sizing: border-box;
+    height: 25px;
+    width: 94px;
+}
+
+.clothessection__button{
+    border: none;
+    font-family: 'Cabinet Grotesk';
+    font-weight: 700;
+    font-size: 20px;
+    cursor: pointer;
+    background: none;
+    color: grey;
+    box-sizing: border-box;
+    height: 25px;
+}
+
+.clothessection__cards{
+    grid-template-columns: repeat(3, 328px);
+    max-width: 1015px;
+    justify-content: center;
+}

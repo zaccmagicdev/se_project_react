@@ -2,8 +2,8 @@ import React from "react";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import './Main.css';
-import { defaultClothingItems } from '../../utils/constants';
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import { defaultClothingItems } from "../../utils/constants";
 
 function Main(props) {
 
@@ -26,7 +26,7 @@ function Main(props) {
 
     const weatherType = getWeatherType(props.temp);
 
-    const filteredCards = defaultClothingItems.filter((item) => {
+    const filteredCards = props.cards.filter((item) => {
         if (item.weather === weatherType) {
             return item;
         }
@@ -38,7 +38,7 @@ function Main(props) {
             <p>It is currently {unitTempInfo}, you may want to wear:</p>
             <ul>
                 {filteredCards.map((item, i) => (
-                    <ItemCard key={i} name={item.name} link={item.link} weather={item.weather} handleCardOpen={props.handleOpenModal} />
+                    <ItemCard key={i} name={item.name} link={item.imageUrl} weather={item.weather} handleCardOpen={props.handleOpenModal} id={item._id}/>
                 ))}
             </ul>
         </div>

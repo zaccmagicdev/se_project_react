@@ -8,7 +8,10 @@ function ItemModal(props) {
                 <button className='itemmodal__close-btn' onClick={props.onClose}></button>
                 <img src={props.link} alt={props.name} className='itemmodal__img' />
                 <div className='itemmodal__caption-box'>
-                    <p>{props.name}</p>
+                    <div className='itemmodal__wrapper'>
+                        <p>{props.name}</p>
+                        <button className='itemmodal__delete-button' onMouseDown={props.onDelete}>Delete item</button>
+                    </div>
                     <p>Weather: {props.temp}</p>
                 </div>
             </div>

@@ -1,0 +1,7 @@
+.sidebar{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 229px;
+    margin-bottom: auto;
+}
