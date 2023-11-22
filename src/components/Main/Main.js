@@ -3,7 +3,6 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import './Main.css';
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import { defaultClothingItems } from "../../utils/constants";
 
 function Main(props) {
 
@@ -33,7 +32,7 @@ function Main(props) {
     });
 
     return (
-        <div>
+        <main>
             <WeatherCard temp={unitTempInfo} time={timeOfDay} weather={props.weather} />
             <p>It is currently {unitTempInfo}, you may want to wear:</p>
             <ul>
@@ -41,7 +40,7 @@ function Main(props) {
                     <ItemCard key={i} name={item.name} link={item.imageUrl} weather={item.weather} handleCardOpen={props.handleOpenModal} id={item._id}/>
                 ))}
             </ul>
-        </div>
+        </main>
     );
 
 }

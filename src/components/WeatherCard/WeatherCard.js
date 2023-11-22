@@ -15,7 +15,7 @@ function WeatherCard(props){
         return(
             <div className="weathercard" style={{background: background[0].color}}>
                 <div className="weathercard__temp">{props.temp}</div>
-                <img className="weathercard__icon" src={background[0].url} ></img>
+                <img className="weathercard__icon"  alt='Weathercard Weather' src={background[0].url } ></img>
             </div>
            );    
     }

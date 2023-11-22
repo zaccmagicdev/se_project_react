@@ -3,10 +3,10 @@ import './Footer.css';
 
 function Footer(){
     return(
-        <div className="footer__container">
+        <footer className="footer__container">
             <p>Developed By Zachary Wedel</p>
             <p>2023</p>
-        </div>
+        </footer>
     );
 }
 

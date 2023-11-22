@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ToggleSwitch from '../ToggleSwitch/ToggleSwitch';
-import HeaderLogo from '../../images/HeaderLogo.svg';
-import ProfileImage from '../../images/profile-img.jpg';
+import headerLogo from '../../images/HeaderLogo.svg';
+import profileImage from '../../images/profile-img.jpg';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
 
@@ -28,27 +28,27 @@ function Header(props) {
 
     if (isMobileMenuOpened) {
         return (
-            <div className='header'>
-                <img src={HeaderLogo} alt='What to Wear?' />
+            <header className='header'>
+                <img src={headerLogo} alt='What to Wear?' />
                 <button className="header__mobile-button" onClick={() => { toggleModalMenu(true) }}></button>
                 {mobileModalOpened && (
                     <div className='header__mobile-menu'>
                         <button className='header__mobile-menu-close-btn' onClick={() => { toggleModalMenu(false) }}></button>
                         <div className='header__mobile-container'>
                             <p className="header__username">Brock Purdy</p>
-                            <img className="header__profile-icon" src={ProfileImage} alt='Profile Image' />
+                            <img className="header__profile-icon" src={profileImage} alt='User Profile Pic' />
                             <button className="header__add-items-bttn" onClick={handleCloseMobileModal}>+ Add clothes</button>
                         </div>
                     </div>
                 )}
-            </div>
+            </header>
         );
     } else {
         return (
-            <div className="header">
+            <header className="header">
                 <div className='header__container'>
                     <NavLink exact to="/">
-                        <img src={HeaderLogo} alt='What to Wear?' />
+                        <img src={headerLogo} alt='What to Wear?' />
                     </NavLink>
                     <p className="header__date-time">{currentDate}, {props.location}</p>
                 </div>
@@ -58,9 +58,9 @@ function Header(props) {
                     <NavLink exact to="/profile">
                         <p className="header__username">Brock Purdy</p>
                     </NavLink>
-                    <img className="header__profile-icon" src={ProfileImage} alt='Profile Image' />
+                    <img className="header__profile-icon" src={profileImage} alt='User Profile Pic' />
                 </div>
-            </div>
+            </header>
         );
     }
 }

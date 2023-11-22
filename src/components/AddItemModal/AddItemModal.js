@@ -1,6 +1,5 @@
 import * as React from 'react';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
-import { defaultClothingItems } from "../../utils/constants";
 
 
 function AddItemModal(props){
@@ -37,7 +36,7 @@ function AddItemModal(props){
             Image
             <input className="clothing__modal-input" placeholder='Image URL' type="url" onChange={handleLinkChange}></input>
         </label>
-        <label className="clothing__modal-label-radio">
+        <section className="clothing__modal-label-radio">
             Select the weather type:
             <label className="clothing__modal-radio-name">
                 <input className="clothing__modal-radio-btn" type="radio" name="button" value='hot' onChange={handleWeatherInput}></input>
@@ -51,7 +50,7 @@ function AddItemModal(props){
                 <input className="clothing__modal-radio-btn" type="radio" name="button" value='cold' onChange={handleWeatherInput}></input>
                 <span>Cold</span>
             </label>
-        </label>
+        </section>
     </ModalWithForm>
     );
 }
