@@ -3,6 +3,11 @@ body{
     margin: 32px 40px;
 }
 
+a{
+    text-decoration: none;
+    color: black;
+}
+
 @media(max-width: 425px){
     body{
         margin: 18px 16px;

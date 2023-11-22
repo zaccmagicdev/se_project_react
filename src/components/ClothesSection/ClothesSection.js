@@ -4,7 +4,7 @@ import './ClothesSection.css';
 
 function ClothesSection(props) {
     return (
-        <>
+        <div className='clothessection'>
             <div className='clothessection__wrapper'>
                 <h2 className='clothessection__title'>Your items</h2>
                 <button className='clothessection__button'>+ Add new</button>
@@ -14,7 +14,7 @@ function ClothesSection(props) {
                     <ItemCard key={i} name={item.name} link={item.imageUrl} weather={item.weather} handleCardOpen={props.handleOpenModal}/>
                 ))}
             </ul>
-        </>
+        </div>
     );
 }
 

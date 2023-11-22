@@ -8,16 +8,16 @@ function ToggleSwitch() {
     return (
         <>
         <input
-          className="react-switch-checkbox"
+          className="toggleswitch__checkbox"
           id={`react-switch-new`}
           type="checkbox"
           onChange={handleToggleSwitchChange}
         />
         <label
-          className="react-switch-label"
+          className="toggleswitch__label"
           htmlFor={`react-switch-new`}
         >
-          <span className={`react-switch-button`} />
+          <span className={`toggleswitch__button`} />
           <span className='toggleswitch__element'>F</span>
           <span className='toggleswitch__element'>C</span>
         </label>

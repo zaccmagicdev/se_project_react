@@ -15,7 +15,6 @@ import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import weatherAPI from "../../utils/weatherAPI";
 import Profile from "../Profile/Profile";
-import { defaultClothingItems } from "../../utils/constants";
 import { CurrentTemperatureUnitContext} from "../../contexts/CurrentTemperatureUnitContext";
 import { BrowserRouter } from "react-router-dom/cjs/react-router-dom.min";
 import { Switch } from "react-router-dom/cjs/react-router-dom";
@@ -65,13 +64,13 @@ function App() {
     const handleAddItemSubmit = (name, link, weather) => {
         api.addItem(name, link, weather)
         .then(res => setServerItems([res, ...serverItems]))
-        .catch(err => console.log(err));
-        setActiveModal("");
+        .catch(err => console.log(err))
+        .finally(setActiveModal(""));
     }
 
     const handleDeleteCard = () => {
         api.deleteItem(selectedCard.id)
-        .then(setServerItems([serverItems.filter((item => item._id !== selectedCard.id))]))
+        .then(setServerItems(serverItems.filter((item => item._id !== selectedCard.id))))
         .catch(err => console.log(err))
         .finally(setActiveModal(""));
     }
@@ -80,7 +79,7 @@ function App() {
         api.getItems()
         .then(res => setServerItems(res))
         .catch(err => console.log(err))
-    }, [activeModal]);
+    }, []);
 
     useEffect(() => {
         weatherAPI().then((res) => {
