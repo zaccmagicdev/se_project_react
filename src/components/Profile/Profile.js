@@ -7,7 +7,7 @@ function Profile(props){
    return(
     <div className='profile'>
       <Sidebar />
-      <ClothesSection handleOpenModal={props.handleOpenModal} cards={props.cards}/>
+      <ClothesSection handleOpenModal={props.handleOpenModal} cards={props.cards} handleOpenFormModal={props.handleOpenFormModal}/>
     </div>
    );
 }

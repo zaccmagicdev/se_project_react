@@ -103,7 +103,7 @@ function App() {
                         <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems}/>
                     </Route>
                     <Route path ="/profile">
-                        <Profile handleOpenModal={selectCard} cards={serverItems}/>
+                        <Profile handleOpenModal={selectCard} cards={serverItems} handleOpenFormModal={handleOpenModal}/>
                     </Route>
                     </Switch>
                     <Footer />

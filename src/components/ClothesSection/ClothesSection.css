@@ -16,7 +16,7 @@
     margin: 0;
     box-sizing: border-box;
     height: 25px;
-    width: 94px;
+    width: 119px;
 }
 
 .clothessection__button{
@@ -29,10 +29,15 @@
     color: grey;
     box-sizing: border-box;
     height: 25px;
+    transition: 0.1s ease-in-out;
 }
 
 .clothessection__cards{
     grid-template-columns: repeat(3, 328px);
     max-width: 1015px;
     justify-content: center;
+}
+
+.clothessection__button:hover{
+    color: black;
 }
