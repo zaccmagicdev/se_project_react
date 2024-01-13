@@ -25,20 +25,22 @@ function Main(props) {
 
     const weatherType = getWeatherType(props.temp);
 
-    const filteredCards = props.cards.filter((item) => {
-        if (item.weather === weatherType) {
-            return item;
-        }
-    });
+    {//const filteredCards = props.cards.filter((item) => {
+        //if (item.weather === weatherType) {
+            //return item;
+        //}
+    //});}
+    }
 
     return (
         <main>
             <WeatherCard temp={unitTempInfo} time={timeOfDay} weather={props.weather} />
             <p>It is currently {unitTempInfo}, you may want to wear:</p>
             <ul>
-                {filteredCards.map((item, i) => (
-                    <ItemCard key={i} name={item.name} link={item.imageUrl} weather={item.weather} handleCardOpen={props.handleOpenModal} id={item._id}/>
-                ))}
+                {//filteredCards.map((item, i) => (
+                    //<ItemCard key={i} name={item.name} link={item.imageUrl} weather={item.weather} handleCardOpen={props.handleOpenModal} id={item._id}/>
+                //))}
+                }
             </ul>
         </main>
     );

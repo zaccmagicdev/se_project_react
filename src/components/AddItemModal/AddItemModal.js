@@ -1,7 +1,6 @@
 import * as React from 'react';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 
-
 function AddItemModal(props){
 
     const [inputValueName, setInputValueName] = React.useState('');

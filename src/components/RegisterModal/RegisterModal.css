@@ -1,0 +1,17 @@
+.registration__modal-label{
+    font-size: 16px;
+}
+
+.registration__modal-input{
+    border: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+    font-family: 'Cabinet Grotesk', Arial, sans-serif;
+    font-size: 16px;
+}
+
+.registration__modal-login-button{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
