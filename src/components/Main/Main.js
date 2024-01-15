@@ -8,6 +8,7 @@ function Main(props) {
 
     const {currentTemperatureUnit} = React.useContext(CurrentTemperatureUnitContext);
 
+
     const timeOfDay = (Date.now() / 1000) >= props.sunrise && (Date.now() / 1000) <= props.sunset
         ? "day" : "night";
 

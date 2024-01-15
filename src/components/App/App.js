@@ -20,6 +20,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import weatherAPI from "../../utils/weatherAPI";
 import Profile from "../Profile/Profile";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Switch } from "react-router-dom/cjs/react-router-dom";
 import { Route } from 'react-router-dom';
 import { api } from "../../utils/Api";
@@ -38,6 +39,7 @@ function App() {
     const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
     const [serverItems, setServerItems] = useState([]);
     const [isLoggedIn, setLogIn] = useState(false);
+    const [currentUser, setCurrentUser] = useState({});
 
     //history object
     let history = useHistory();
@@ -65,35 +67,40 @@ function App() {
     const handleAddItemSubmit = (name, link, weather) => {
         api.addItem(name, link, weather)
             .then(res => setServerItems([res, ...serverItems]))
-            .then(() => {handleCloseModal()})
+            .then(() => { handleCloseModal() })
             .catch(err => console.log(err));
     }
 
     const handleDeleteCard = () => {
         api.deleteItem(selectedCard.id)
             .then(() => setServerItems(serverItems.filter((item => item._id !== selectedCard.id))))
-            .then(() => {handleCloseModal()})
+            .then(() => { handleCloseModal() })
             .catch(err => console.log(err));
     }
 
     const handleRegistration = (name, avatar, email, password) => {
         auth.register(name, avatar, email, password)
-        .then((res) => {
-            handleCloseModal();
-            //this will be the code for when we can log in
-            console.log(res);
-        }).catch(err => console.log(err))
+            .then(() => {
+                handleCloseModal();
+                handleLogin(email, password)
+                //this will be the code for when we can log in
+
+            }).catch(err => console.log(err))
     };
 
     const handleLogin = (email, password) => {
         auth.authorize(email, password)
-        .then((data) => {
-            if(data.jwt){
-                setLogIn(true);
-                console.log(data);
-            }
-        })
+            .then(() => {
+                setLogIn(true)
+            })
     }
+
+    useEffect(() => {
+        auth.currentUser(localStorage.getItem("jwt"))
+            .then((res) => setCurrentUser(res))
+            .then(() => setLogIn(true))
+            .catch((err) => { console.log(err) })
+    }, []);
 
     //calling apis
     useEffect(() => {
@@ -113,7 +120,8 @@ function App() {
     }, []);
 
     return (
-            <div className="App">
+        <div className="App">
+            <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
                 <CurrentTemperatureUnitContext.Provider
                     value={{ currentTemperatureUnit, handleToggleSwitchChange }}
                 >
@@ -129,13 +137,15 @@ function App() {
                     <Footer />
                     {activeModal === "form" && (
                         //<AddItemModal handleCloseModal={handleCloseModal} submitMethod={handleAddItemSubmit}></AddItemModal>
-                        <RegisterModal handleCloseModal={handleCloseModal} submitMethod={handleRegistration}/>
+                        <RegisterModal handleCloseModal={handleCloseModal} submitMethod={handleRegistration} />
+                        //<LoginModal handleCloseModal={handleCloseModal} submitMethod={handleLogin}/>
                     )}
                     {activeModal === "image" && (
                         <ItemModal link={selectedCard.link} name={selectedCard.name} temp={selectedCard.weather} onClose={handleCloseModal} onDelete={handleDeleteCard} />
                     )}
                 </CurrentTemperatureUnitContext.Provider>
-            </div>
+            </CurrentUserContext.Provider>
+        </div>
     );
 }
 
