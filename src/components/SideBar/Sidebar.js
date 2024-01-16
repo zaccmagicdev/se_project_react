@@ -12,7 +12,7 @@ function Sidebar(props){
                 <img className = "header__profile-icon" src={currentUser.data.avatar} alt='User Profile Pic'/>
                 <p className = "header__username">{currentUser.data.name}</p>
             </div>
-            <button className='sidebar__button'>Change Profile Data</button>
+            <button className='sidebar__button' onClick={props.handleEditProfile}>Change Profile Data</button>
             <button className='sidebar__button' onClick={props.handleLogOut}>Log out</button>
         </div>
     )

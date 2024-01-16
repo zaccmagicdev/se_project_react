@@ -28,7 +28,6 @@ export const authorize = (email, password) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log(data)
       if (data.token) {
         localStorage.setItem("jwt", data.token);
         return data;
@@ -46,6 +45,27 @@ export const currentUser = (token) => {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`
     },
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.log(err));
+};
+
+export const updateInfo = (name, avatar, token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      name: name,
+      avatar: avatar
+    })
   })
     .then((response) => {
       return response.json();

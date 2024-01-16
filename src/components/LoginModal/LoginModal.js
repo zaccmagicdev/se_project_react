@@ -30,7 +30,7 @@ function LoginModal(props){
             Password*
                 <input className="login__modal-input" placeholder='Password' type="password" onChange={handlePasswordChange}></input>
             </label>
-            <button className="login__modal-register-button">or Register</button>
+            <button className="login__modal-register-button" onClick={props.handleOpenRegistration}>or Register</button>
         </ModalWithForm>
     );
 }

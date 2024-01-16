@@ -1,0 +1,11 @@
+.profile-edit__label{
+    font-size: 16px;
+}
+
+.profile-edit__input{
+    border: none;
+    border-bottom: 1px solid black;
+    width: 100%;
+    font-family: 'Cabinet Grotesk', Arial, sans-serif;
+    font-size: 16px;
+}

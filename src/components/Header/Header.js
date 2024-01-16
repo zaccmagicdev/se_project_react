@@ -62,9 +62,9 @@ function Header(props) {
                 <ToggleSwitch />
                 <button className="header__add-items-bttn" onClick={props.handleClick}>+ Add clothes</button>
                 <NavLink exact to="/profile">
-                    <p className="header__username">{isLoading ? 'Loading' : currentUser.data.name}</p>
+                    <p className="header__username">{currentUser === null ? 'Loading' : currentUser.data.name}</p>
                 </NavLink>
-                <img className="header__profile-icon" src={isLoading ? 'D' : currentUser.data.avatar} alt='User Profile Pic' />
+                <img className="header__profile-icon" src={currentUser === null ? 'D' : currentUser.data.avatar} alt='User Profile Pic' />
             </div>
                 :
                 <div className='header__container'>
