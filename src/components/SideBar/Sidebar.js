@@ -1,12 +1,19 @@
 import * as React from 'react';
-import profileImage from '../../images/profile-img.jpg';
 import './Sidebar.css';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Sidebar(){
+function Sidebar(props){
+
+    const {currentUser} = React.useContext(CurrentUserContext)
+
     return(
         <div className='sidebar'>
-            <img className = "header__profile-icon" src={profileImage} alt='User Profile Pic'/>
-            <p className = "header__username">Brock Purdy</p>
+            <div className='sidebar__profile-info'>
+                <img className = "header__profile-icon" src={currentUser.data.avatar} alt='User Profile Pic'/>
+                <p className = "header__username">{currentUser.data.name}</p>
+            </div>
+            <button className='sidebar__button'>Change Profile Data</button>
+            <button className='sidebar__button' onClick={props.handleLogOut}>Log out</button>
         </div>
     )
 }

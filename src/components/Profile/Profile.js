@@ -6,8 +6,8 @@ import './Profile.css';
 function Profile(props){
    return(
     <div className='profile'>
-      <Sidebar />
-      <ClothesSection handleOpenModal={props.handleOpenModal} cards={props.cards} handleOpenFormModal={props.handleOpenFormModal}/>
+      <Sidebar handleLogOut={props.handleLogOut}/>
+      {/*<ClothesSection handleOpenModal={props.handleOpenModal} cards={props.cards} handleOpenFormModal={props.handleOpenFormModal}/*/}
     </div>
    );
 }

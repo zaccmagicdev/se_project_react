@@ -5,6 +5,7 @@ import profileImage from '../../images/profile-img.jpg';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { isLoadingContext } from '../../contexts/isLoadingContext';
 
 //when the menu is actually open for the modal we can mount it and make it's z index on top
 
@@ -15,8 +16,7 @@ function Header(props) {
     const [isMobileMenuOpened, toggleMobileMenu] = useState(false);
     const [mobileModalOpened, toggleModalMenu] = useState(false);
     const {currentUser} = React.useContext(CurrentUserContext);
-
-    console.log(currentUser)
+    const {isLoading} = React.useContext(isLoadingContext);
 
     const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
     useEffect(() => {
@@ -56,14 +56,23 @@ function Header(props) {
                     </NavLink>
                     <p className="header__date-time">{currentDate}, {props.location}</p>
                 </div>
+                {props.loggedIn ? 
+                
                 <div className='header__container'>
-                    <ToggleSwitch />
-                    <button className="header__add-items-bttn" onClick={props.handleClick}>+ Add clothes</button>
-                    <NavLink exact to="/profile">
-                        <p className="header__username">Brock Purdy</p>
-                    </NavLink>
-                    <img className="header__profile-icon" src={profileImage} alt='User Profile Pic' />
-                </div>
+                <ToggleSwitch />
+                <button className="header__add-items-bttn" onClick={props.handleClick}>+ Add clothes</button>
+                <NavLink exact to="/profile">
+                    <p className="header__username">{isLoading ? 'Loading' : currentUser.data.name}</p>
+                </NavLink>
+                <img className="header__profile-icon" src={isLoading ? 'D' : currentUser.data.avatar} alt='User Profile Pic' />
+            </div>
+                :
+                <div className='header__container'>
+                    <button className='header__add-items-bttn' onClick={props.handleSignUpClick}>Sign up</button>
+                    <button className='header__add-items-bttn' onClick={props.handleLogInClick}>Log in</button>
+                </div> 
+                }
+                
             </header>
         );
     }

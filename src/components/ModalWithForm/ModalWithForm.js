@@ -1,6 +1,8 @@
 import React from 'react';
 import './ModalWithForm.css';
 
+//at some point I should validate these forms
+
 function ModalWithForm(props){
     return(
         <div className="modal">
