@@ -21,7 +21,6 @@ import weatherAPI from "../../utils/weatherAPI";
 import Profile from "../Profile/Profile";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
-import { isLoadingContext } from "../../contexts/isLoadingContext";
 import { Switch } from "react-router-dom/cjs/react-router-dom";
 import { Route } from 'react-router-dom';
 import { api } from "../../utils/Api";
@@ -81,11 +80,10 @@ function App() {
 
     const handleAddItemSubmit = (name, url, weather) => {
         auth.uploadItem(name, url, weather, localStorage.getItem("jwt"))
-            .then((res) => {
-                console.log(res)
-            })
         auth.getItems()
-        .then(res => console.log(res))    
+            .then(res => setServerItems(res.data))
+            .then(() => handleCloseModal())
+            .catch(err => console.log(err))
     }
 
     const handleDeleteCard = () => {
@@ -151,10 +149,10 @@ function App() {
 
     useEffect(() => {
         auth.getItems()
-        .then((res) => {
-            setServerItems(res.data)
-        })
-        .catch((err) => console.log(err))
+            .then((res) => {
+                setServerItems(res.data)
+            })
+            .catch((err) => console.log(err))
     }, [])
 
     //calling apis
@@ -170,39 +168,37 @@ function App() {
 
     return (
         <div className="App">
-            <isLoadingContext.Provider value={{ isLoading, setLoading }}>
-                <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
-                    <CurrentTemperatureUnitContext.Provider
-                        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-                    >
-                        <Header location={city} handleGarmentClick={handleOpenGarmentModal} handleSignUpClick={handleOpenSignUpModal} handleLogInClick={handleOpenLoginModal} loggedIn={isLoggedIn} />
-                        <Switch>
-                            <Route exact path="/">
-                                <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} />
-                            </Route>
-                            <ProtectedRoute path="/profile" loggedIn={isLoggedIn}>
-                                <Profile handleOpenModal={selectCard} handleLogOut={handleLogOut} cards={serverItems} handleOpenFormModal={handleOpenGarmentModal} handleEditProfile={handleOpenEditProfileModal} />
-                            </ProtectedRoute>
-                        </Switch>
-                        <Footer />
-                        {activeModal === "form" && (
-                            <AddItemModal handleCloseModal={handleCloseModal} submitMethod={handleAddItemSubmit} />
-                        )}
-                        {activeModal === "image" && (
-                            <ItemModal link={selectedCard.link} name={selectedCard.name} temp={selectedCard.weather} onClose={handleCloseModal} onDelete={handleDeleteCard} />
-                        )}
-                        {activeModal === "signup" && (
-                            <RegisterModal handleCloseModal={handleCloseModal} submitMethod={handleRegistration} handleOpenLogin={handleOpenLoginModal} />
-                        )}
-                        {activeModal === "login" && (
-                            <LoginModal handleCloseModal={handleCloseModal} submitMethod={handleLogin} handleOpenRegistration={handleOpenSignUpModal} />
-                        )}
-                        {activeModal === "edit" && (
-                            <EditProfileModal handleCloseModal={handleCloseModal} submitMethod={handleProfileEdit} />
-                        )}
-                    </CurrentTemperatureUnitContext.Provider>
-                </CurrentUserContext.Provider>
-            </isLoadingContext.Provider>
+            <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+                <CurrentTemperatureUnitContext.Provider
+                    value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+                >
+                    <Header location={city} handleGarmentClick={handleOpenGarmentModal} handleSignUpClick={handleOpenSignUpModal} handleLogInClick={handleOpenLoginModal} loggedIn={isLoggedIn} />
+                    <Switch>
+                        <Route exact path="/">
+                            <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} />
+                        </Route>
+                        <ProtectedRoute path="/profile" loggedIn={isLoggedIn}>
+                            <Profile handleOpenModal={selectCard} handleLogOut={handleLogOut} cards={serverItems} handleOpenFormModal={handleOpenGarmentModal} handleEditProfile={handleOpenEditProfileModal} />
+                        </ProtectedRoute>
+                    </Switch>
+                    <Footer />
+                    {activeModal === "form" && (
+                        <AddItemModal handleCloseModal={handleCloseModal} submitMethod={handleAddItemSubmit} />
+                    )}
+                    {activeModal === "image" && (
+                        <ItemModal link={selectedCard.link} name={selectedCard.name} temp={selectedCard.weather} onClose={handleCloseModal} onDelete={handleDeleteCard} />
+                    )}
+                    {activeModal === "signup" && (
+                        <RegisterModal handleCloseModal={handleCloseModal} submitMethod={handleRegistration} handleOpenLogin={handleOpenLoginModal} />
+                    )}
+                    {activeModal === "login" && (
+                        <LoginModal handleCloseModal={handleCloseModal} submitMethod={handleLogin} handleOpenRegistration={handleOpenSignUpModal} />
+                    )}
+                    {activeModal === "edit" && (
+                        <EditProfileModal handleCloseModal={handleCloseModal} submitMethod={handleProfileEdit} />
+                    )}
+                </CurrentTemperatureUnitContext.Provider>
+            </CurrentUserContext.Provider>
         </div>
     );
 }

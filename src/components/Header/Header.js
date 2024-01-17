@@ -5,7 +5,6 @@ import profileImage from '../../images/profile-img.jpg';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { isLoadingContext } from '../../contexts/isLoadingContext';
 
 //when the menu is actually open for the modal we can mount it and make it's z index on top
 
@@ -16,7 +15,6 @@ function Header(props) {
     const [isMobileMenuOpened, toggleMobileMenu] = useState(false);
     const [mobileModalOpened, toggleModalMenu] = useState(false);
     const {currentUser} = React.useContext(CurrentUserContext);
-    const {isLoading} = React.useContext(isLoadingContext);
 
     const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
     useEffect(() => {

@@ -2,6 +2,7 @@ import * as React from 'react';
 import ItemCard from "../ItemCard/ItemCard";
 import './ClothesSection.css';
 
+
 function ClothesSection(props) {
     return (
         <div className='clothessection'>
