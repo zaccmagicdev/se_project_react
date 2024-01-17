@@ -6,13 +6,13 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 
 function Main(props) {
 
-    const {currentTemperatureUnit} = React.useContext(CurrentTemperatureUnitContext);
-
+    let filteredCards = [];
+    const { currentTemperatureUnit } = React.useContext(CurrentTemperatureUnitContext);
 
     const timeOfDay = (Date.now() / 1000) >= props.sunrise && (Date.now() / 1000) <= props.sunset
         ? "day" : "night";
 
-    const unitTempInfo = currentTemperatureUnit === 'F' ? `${Math.round(props.temp)}°F` : `${Math.round((props.temp - 32) * 5/9)}°C`; 
+    const unitTempInfo = currentTemperatureUnit === 'F' ? `${Math.round(props.temp)}°F` : `${Math.round((props.temp - 32) * 5 / 9)}°C`;
 
     function getWeatherType(temperature) {
         if (temperature >= 86) {
@@ -26,23 +26,25 @@ function Main(props) {
 
     const weatherType = getWeatherType(props.temp);
 
-    {//const filteredCards = props.cards.filter((item) => {
-        //if (item.weather === weatherType) {
-            //return item;
-        //}
-    //});}
+
+    if (props.cards !== null) {
+        filteredCards = props.cards.filter((item) => {
+            if (item.weather === weatherType) {
+                return item;
+            }
+        });
     }
 
     return (
         <main>
             <WeatherCard temp={unitTempInfo} time={timeOfDay} weather={props.weather} />
             <p>It is currently {unitTempInfo}, you may want to wear:</p>
-            <ul>
-                {//filteredCards.map((item, i) => (
-                    //<ItemCard key={i} name={item.name} link={item.imageUrl} weather={item.weather} handleCardOpen={props.handleOpenModal} id={item._id}/>
-                //))}
-                }
-            </ul>
+            {props.cards !== null &&
+                <ul>
+                    {filteredCards.map((item, i) => (
+                        <ItemCard key={i} name={item.name} link={item.imageUrl} weather={item.weather} handleCardOpen={props.handleOpenModal} id={item._id} />
+                    ))}
+                </ul>}
         </main>
     );
 

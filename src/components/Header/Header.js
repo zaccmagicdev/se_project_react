@@ -60,7 +60,7 @@ function Header(props) {
                 
                 <div className='header__container'>
                 <ToggleSwitch />
-                <button className="header__add-items-bttn" onClick={props.handleClick}>+ Add clothes</button>
+                <button className="header__add-items-bttn" onClick={props.handleGarmentClick}>+ Add clothes</button>
                 <NavLink exact to="/profile">
                     <p className="header__username">{currentUser === null ? 'Loading' : currentUser.data.name}</p>
                 </NavLink>

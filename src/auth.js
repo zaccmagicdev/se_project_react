@@ -1,5 +1,7 @@
 export const BASE_URL = 'http://localhost:3001';
 
+
+//user based commands
 export const register = (name, avatar, email, password) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
@@ -66,6 +68,39 @@ export const updateInfo = (name, avatar, token) => {
       name: name,
       avatar: avatar
     })
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => console.log(err));
+};
+
+//item based commands
+
+export const getItems = () => {
+  return fetch(`${BASE_URL}/items`, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json"
+    },
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((err) => console.log(err));
+};
+
+export const uploadItem = (name, imageUrl, weather, token) => {
+  return fetch(`${BASE_URL}/items`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ name, imageUrl, weather })
   })
     .then((response) => {
       return response.json();

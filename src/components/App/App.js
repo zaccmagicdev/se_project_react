@@ -39,7 +39,7 @@ function App() {
     const [sunrise, setSunrise] = useState(0);
     const [sunset, setSunset] = useState(0);
     const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
-    const [serverItems, setServerItems] = useState([]);
+    const [serverItems, setServerItems] = useState(null);
     const [isLoggedIn, setLogIn] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
     const [isLoading, setLoading] = useState(true);
@@ -79,11 +79,13 @@ function App() {
             : setCurrentTemperatureUnit('F');
     };
 
-    const handleAddItemSubmit = (name, link, weather) => {
-        api.addItem(name, link, weather)
-            .then(res => setServerItems([res, ...serverItems]))
-            .then(() => { handleCloseModal() })
-            .catch(err => console.log(err));
+    const handleAddItemSubmit = (name, url, weather) => {
+        auth.uploadItem(name, url, weather, localStorage.getItem("jwt"))
+            .then((res) => {
+                console.log(res)
+            })
+        auth.getItems()
+        .then(res => console.log(res))    
     }
 
     const handleDeleteCard = () => {
@@ -113,17 +115,18 @@ function App() {
                         setLogIn(true)
                         history.push('/');
                     })
+                    .catch((err) => console.log(err));
             })
     }
 
     const handleProfileEdit = (name, avatar) => {
         auth.updateInfo(name, avatar, localStorage.getItem("jwt"))
-        .then((res) => {
-            currentUser.data.name = res.name;
-            currentUser.data.avatar = res.avatar;
-        })
-        .then(() => {handleCloseModal();})
-        .catch((err) => console.log(err))
+            .then((res) => {
+                currentUser.data.name = res.name;
+                currentUser.data.avatar = res.avatar;
+            })
+            .then(() => { handleCloseModal(); })
+            .catch((err) => console.log(err))
     };
 
     function handleLogOut() {
@@ -136,7 +139,6 @@ function App() {
     useEffect(() => {
         auth.currentUser(localStorage.getItem("jwt"))
             .then((res) => {
-                console.log(res)
                 if (res.data) {
                     setLogIn(true)
                 }
@@ -144,15 +146,18 @@ function App() {
             })
             .then(() => { setLoading(false) })
             .catch((err) => { console.log(err) })
+
     }, []);
+
+    useEffect(() => {
+        auth.getItems()
+        .then((res) => {
+            setServerItems(res.data)
+        })
+        .catch((err) => console.log(err))
+    }, [])
 
     //calling apis
-    useEffect(() => {
-        api.getItems()
-            .then(res => setServerItems(res))
-            .catch(err => console.log(err))
-    }, []);
-
     useEffect(() => {
         weatherAPI().then((res) => {
             setTemp(Math.round(res.main.temp));
@@ -176,24 +181,24 @@ function App() {
                                 <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} />
                             </Route>
                             <ProtectedRoute path="/profile" loggedIn={isLoggedIn}>
-                                <Profile handleOpenModal={selectCard} handleLogOut={handleLogOut} cards={serverItems} handleOpenFormModal={handleOpenGarmentModal} handleEditProfile={handleOpenEditProfileModal}/>
+                                <Profile handleOpenModal={selectCard} handleLogOut={handleLogOut} cards={serverItems} handleOpenFormModal={handleOpenGarmentModal} handleEditProfile={handleOpenEditProfileModal} />
                             </ProtectedRoute>
                         </Switch>
                         <Footer />
                         {activeModal === "form" && (
-                            <AddItemModal handleCloseModal={handleCloseModal} submitMethod={handleAddItemSubmit}></AddItemModal>
+                            <AddItemModal handleCloseModal={handleCloseModal} submitMethod={handleAddItemSubmit} />
                         )}
                         {activeModal === "image" && (
                             <ItemModal link={selectedCard.link} name={selectedCard.name} temp={selectedCard.weather} onClose={handleCloseModal} onDelete={handleDeleteCard} />
                         )}
                         {activeModal === "signup" && (
-                            <RegisterModal handleCloseModal={handleCloseModal} submitMethod={handleRegistration} handleOpenLogin={handleOpenLoginModal}/>
+                            <RegisterModal handleCloseModal={handleCloseModal} submitMethod={handleRegistration} handleOpenLogin={handleOpenLoginModal} />
                         )}
                         {activeModal === "login" && (
-                            <LoginModal handleCloseModal={handleCloseModal} submitMethod={handleLogin} handleOpenRegistration={handleOpenSignUpModal}/>
+                            <LoginModal handleCloseModal={handleCloseModal} submitMethod={handleLogin} handleOpenRegistration={handleOpenSignUpModal} />
                         )}
                         {activeModal === "edit" && (
-                            <EditProfileModal handleCloseModal={handleCloseModal} submitMethod={handleProfileEdit}/>
+                            <EditProfileModal handleCloseModal={handleCloseModal} submitMethod={handleProfileEdit} />
                         )}
                     </CurrentTemperatureUnitContext.Provider>
                 </CurrentUserContext.Provider>
