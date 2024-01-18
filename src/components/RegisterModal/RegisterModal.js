@@ -34,15 +34,15 @@ function handleSubmit(e){
         <ModalWithForm title="Sign up" name='registration' buttonName="Next" onClose={props.handleCloseModal} handleSubmit={handleSubmit}>
             <label className='registration__modal-label'>
             Email*
-                <input className="registration__modal-input" placeholder='Email' type="email" onChange={handleEmailChange}></input>
+                <input className="registration__modal-input" placeholder='Email' type="email" onChange={handleEmailChange} required></input>
             </label>
             <label className='registration__modal-label'>
             Password*
-                <input className="registration__modal-input" placeholder='Password' type="password" onChange={handlePasswordChange}></input>
+                <input className="registration__modal-input" placeholder='Password' type="password" onChange={handlePasswordChange} required></input>
             </label>
             <label className='registration__modal-label'>
             Name*
-                <input className="registration__modal-input" placeholder='Name' type="text" onChange={handleNameChange}></input>
+                <input className="registration__modal-input" placeholder='Name' type="text" onChange={handleNameChange} required></input>
             </label>
             <label className='registration__modal-label'>
             Avatar URL

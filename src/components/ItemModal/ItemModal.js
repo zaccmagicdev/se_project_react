@@ -1,7 +1,17 @@
 import React from 'react';
 import './ItemModal.css';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function ItemModal(props) {
+
+    const {currentUser} = React.useContext(CurrentUserContext);
+    const isOwn = props.currentCard.owner === currentUser.data._id;
+
+
+    const itemDeleteButtonClassName = (
+        `itemmodal__delete-button ${isOwn ? 'itemmodal__delete-button_visible' : 'itemmodal__delete-button_hidden'}`
+      );
+
     return (
         <div className='itemmodal'>
             <div className='itemmodal__container'>
@@ -12,7 +22,7 @@ function ItemModal(props) {
                 <div className='itemmodal__caption-box'>
                     <div className='itemmodal__wrapper'>
                         <p>{props.name}</p>
-                        <button className='itemmodal__delete-button' onMouseDown={props.onDelete}>Delete item</button>
+                        <button className={itemDeleteButtonClassName} onMouseDown={props.onDelete}>Delete item</button>
                     </div>
                     <p>Weather: {props.temp}</p>
                 </div>

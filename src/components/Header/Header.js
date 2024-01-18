@@ -15,6 +15,21 @@ function Header(props) {
     const [isMobileMenuOpened, toggleMobileMenu] = useState(false);
     const [mobileModalOpened, toggleModalMenu] = useState(false);
     const {currentUser} = React.useContext(CurrentUserContext);
+    let profilePic;
+
+    if(currentUser !== null){
+
+        if(currentUser.data.avatar.length === 0){
+            profilePic = 
+            <div className='header__default-img'>
+                <p className='header__default-initial'>{currentUser.data.name[0]}</p>
+            </div>
+        } else {
+            profilePic = <img className="header__profile-icon" src={currentUser === null ? 'Loading' : currentUser.data.avatar} alt='User Profile Pic' />
+        }
+    }
+
+    console.log(profilePic)
 
     const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
     useEffect(() => {
@@ -62,7 +77,7 @@ function Header(props) {
                 <NavLink exact to="/profile">
                     <p className="header__username">{currentUser === null ? 'Loading' : currentUser.data.name}</p>
                 </NavLink>
-                <img className="header__profile-icon" src={currentUser === null ? 'D' : currentUser.data.avatar} alt='User Profile Pic' />
+                {profilePic}
             </div>
                 :
                 <div className='header__container'>

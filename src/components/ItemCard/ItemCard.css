@@ -30,6 +30,20 @@
     color: rgba(0, 0, 0, 0.6);
 }
 
+.itemcard__like-button{
+    position: relative;
+    background: transparent url('../../images/unfilledheart.svg') center;
+    border: none;
+    width: 20px;
+    height: 18px;
+    top: 20px;
+    left: 5px;
+}
+
+.itemcard__like-button_liked{
+    background: transparent url('../../images/filledheart.svg') center;
+}
+
 @media(max-width: 425px){
     .itemcard{
         height: 164px;

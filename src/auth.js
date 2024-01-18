@@ -110,3 +110,48 @@ export const uploadItem = (name, imageUrl, weather, token) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const deleteItem = (id, token) => {
+  return fetch(`${BASE_URL}/items/${id}`, {
+    method: 'DELETE',
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`
+    },
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .then((res) => {
+    return res;
+  })
+  .catch((err) => console.log(err));
+};
+
+export const likeItem = (id, token) => {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`
+    },
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .catch((err) => console.log(err));
+};
+
+export const unlikeItem = (id, token) => {
+  return fetch(`${BASE_URL}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`
+    },
+  })
+  .then((response) => {
+    return response.json();
+  })
+  .catch((err) => console.log(err));
+};

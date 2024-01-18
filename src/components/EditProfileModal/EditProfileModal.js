@@ -24,7 +24,7 @@ function EditProfileModal(props) {
         <ModalWithForm title="Change Profile Data" name='edit-profile' buttonName="Save Changes" onClose={props.handleCloseModal} handleSubmit={handleSubmit}>
             <label className='profile-edit__label'>
                 Name*
-                <input className="profile-edit__input" placeholder='Name' type="text" onChange={handleNameChange}></input>
+                <input className="profile-edit__input" placeholder='Name' type="text" onChange={handleNameChange} required></input>
             </label>
             <label className='profile-edit__label'>
                 Avatar URL

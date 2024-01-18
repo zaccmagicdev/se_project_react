@@ -2,15 +2,26 @@ import * as React from 'react';
 import './Sidebar.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Sidebar(props){
+function Sidebar(props) {
 
-    const {currentUser} = React.useContext(CurrentUserContext)
+    let profilePic;
+    const { currentUser } = React.useContext(CurrentUserContext)
 
-    return(
+    if (currentUser.data.avatar.length === 0) {
+        profilePic =
+            <div className='sidebar__default-img'>
+                <p className='sidebar__default-initial'>{currentUser.data.name[0]}</p>
+            </div>
+    } else {
+        profilePic = <img className="sidebar__profile-icon" src={currentUser === null ? 'Loading' : currentUser.data.avatar} alt='User Profile Pic' />
+    }
+
+
+    return (
         <div className='sidebar'>
             <div className='sidebar__profile-info'>
-                <img className = "header__profile-icon" src={currentUser.data.avatar} alt='User Profile Pic'/>
-                <p className = "header__username">{currentUser.data.name}</p>
+                {profilePic}
+                <p className="sidebar__username">{currentUser.data.name}</p>
             </div>
             <button className='sidebar__button' onClick={props.handleEditProfile}>Change Profile Data</button>
             <button className='sidebar__button' onClick={props.handleLogOut}>Log out</button>

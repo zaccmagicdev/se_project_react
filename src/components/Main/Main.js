@@ -42,7 +42,7 @@ function Main(props) {
             {props.cards !== null &&
                 <ul>
                     {filteredCards.map((item, i) => (
-                        <ItemCard key={i} name={item.name} link={item.imageUrl} weather={item.weather} handleCardOpen={props.handleOpenModal} id={item._id} />
+                        <ItemCard key={i} name={item.name} link={item.imageUrl} weather={item.weather} handleCardOpen={props.handleOpenModal} id={item._id} owner={item.owner}/>
                     ))}
                 </ul>}
         </main>

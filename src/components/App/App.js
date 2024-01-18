@@ -23,7 +23,6 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Switch } from "react-router-dom/cjs/react-router-dom";
 import { Route } from 'react-router-dom';
-import { api } from "../../utils/Api";
 import * as auth from '../../auth';
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
@@ -41,7 +40,6 @@ function App() {
     const [serverItems, setServerItems] = useState(null);
     const [isLoggedIn, setLogIn] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
-    const [isLoading, setLoading] = useState(true);
 
     //history object
     let history = useHistory();
@@ -72,6 +70,13 @@ function App() {
         setSelectedCard(card);
     };
 
+    const handleCardUpdate = () => {
+        auth.getItems()
+        .then(res => setServerItems(res.data))
+        .then(() => handleCloseModal())
+        .catch(err => console.log(err))
+    };
+
     const handleToggleSwitchChange = () => {
         currentTemperatureUnit === 'F'
             ? setCurrentTemperatureUnit('C')
@@ -80,17 +85,17 @@ function App() {
 
     const handleAddItemSubmit = (name, url, weather) => {
         auth.uploadItem(name, url, weather, localStorage.getItem("jwt"))
-        auth.getItems()
-            .then(res => setServerItems(res.data))
-            .then(() => handleCloseModal())
-            .catch(err => console.log(err))
+        .then(() => {
+            handleCardUpdate();
+        })
+        .catch(err => console.log(err))
     }
 
     const handleDeleteCard = () => {
-        api.deleteItem(selectedCard.id)
-            .then(() => setServerItems(serverItems.filter((item => item._id !== selectedCard.id))))
-            .then(() => { handleCloseModal() })
-            .catch(err => console.log(err));
+        auth.deleteItem(selectedCard.id, localStorage.getItem("jwt"))
+        .then(() => {
+           handleCardUpdate();
+        })
     }
 
     const handleRegistration = (name, avatar, email, password) => {
@@ -134,6 +139,32 @@ function App() {
         history.push('/');
     }
 
+    const handleCardLike = ({ id, isLiked }) => {
+        const token = localStorage.getItem("jwt");
+        // Check if this card is now liked
+        isLiked
+          ? // if so, send a request to add the user's id to the card's likes array
+            auth
+              // the first argument is the card's id
+              .likeItem(id, token)
+              .then((updatedCard) => {
+                setServerItems((cards) =>
+                  cards.map((c) => (c._id === id ? updatedCard : c))
+                );
+              })
+              .catch((err) => console.log(err))
+          : // if not, send a request to remove the user's id from the card's likes array
+            auth
+              // the first argument is the card's id
+              .unlikeItem(id, token) 
+              .then((updatedCard) => {
+                setServerItems((cards) =>
+                  cards.map((c) => (c._id === id ? updatedCard : c))
+                );
+              })
+              .catch((err) => console.log(err));
+      }; 
+
     useEffect(() => {
         auth.currentUser(localStorage.getItem("jwt"))
             .then((res) => {
@@ -142,7 +173,6 @@ function App() {
                 }
                 setCurrentUser(res)
             })
-            .then(() => { setLoading(false) })
             .catch((err) => { console.log(err) })
 
     }, []);
@@ -151,6 +181,7 @@ function App() {
         auth.getItems()
             .then((res) => {
                 setServerItems(res.data)
+                console.log(res.data)
             })
             .catch((err) => console.log(err))
     }, [])
@@ -186,7 +217,7 @@ function App() {
                         <AddItemModal handleCloseModal={handleCloseModal} submitMethod={handleAddItemSubmit} />
                     )}
                     {activeModal === "image" && (
-                        <ItemModal link={selectedCard.link} name={selectedCard.name} temp={selectedCard.weather} onClose={handleCloseModal} onDelete={handleDeleteCard} />
+                        <ItemModal link={selectedCard.link} name={selectedCard.name} temp={selectedCard.weather} onClose={handleCloseModal} onDelete={handleDeleteCard} currentCard={selectedCard}/>
                     )}
                     {activeModal === "signup" && (
                         <RegisterModal handleCloseModal={handleCloseModal} submitMethod={handleRegistration} handleOpenLogin={handleOpenLoginModal} />

@@ -59,6 +59,14 @@
    cursor: pointer;
 }
 
+.itemmodal__delete-button_visible{
+    display:initial;
+}
+
+.itemmodal__delete-button_hidden{
+    display: none;
+}
+
 .itemmodal__caption-box{
     padding: 0px 32px 0px 32px;
 }

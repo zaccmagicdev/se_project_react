@@ -38,15 +38,15 @@ function AddItemModal(props){
         <section className="clothing__modal-label-radio">
             Select the weather type:
             <label className="clothing__modal-radio-name">
-                <input className="clothing__modal-radio-btn" type="radio" name="button" value='hot' onChange={handleWeatherInput}></input>
+                <input className="clothing__modal-radio-btn" type="radio" name="button" value='hot' onChange={handleWeatherInput} required></input>
                 <span>Hot</span>
             </label>
             <label className="clothing__modal-radio-name">
-                <input className="clothing__modal-radio-btn" type="radio" name="button" value='warm' onChange={handleWeatherInput}></input>
+                <input className="clothing__modal-radio-btn" type="radio" name="button" value='warm' onChange={handleWeatherInput} required></input>
                 <span>Warm</span>
             </label>
             <label className="clothing__modal-radio-name">
-                <input className="clothing__modal-radio-btn" type="radio" name="button" value='cold' onChange={handleWeatherInput}></input>
+                <input className="clothing__modal-radio-btn" type="radio" name="button" value='cold' onChange={handleWeatherInput} required></input>
                 <span>Cold</span>
             </label>
         </section>

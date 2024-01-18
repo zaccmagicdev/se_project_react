@@ -12,6 +12,29 @@
     margin-top: 37px;
 }
 
+.sidebar__profile-icon{
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    background-position: center;
+    border: 1px solid grey;
+}
+
+.sidebar__default-img{
+    background-color: lightgray;
+    border-radius: 25px;
+    width: 40px;
+    height: 40px;
+    border: 1px solid grey;
+}
+
+.sidebar__default-initial{
+    position: relative;
+    left: 14px;
+    bottom: 9px;
+    color: white;
+}
+
 .sidebar__button{
     border: none;
     cursor: pointer;
