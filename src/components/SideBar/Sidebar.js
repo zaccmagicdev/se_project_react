@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './Sidebar.css';
+import './SideBar.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function Sidebar(props) {

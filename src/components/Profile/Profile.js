@@ -1,6 +1,6 @@
 import * as React from 'react';
 import ClothesSection from '../ClothesSection/ClothesSection';
-import Sidebar from '../SideBar/Sidebar';
+import Sidebar from '../SideBar/SideBar';
 import './Profile.css';
 
 function Profile(props) {
