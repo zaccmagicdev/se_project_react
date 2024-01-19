@@ -29,8 +29,6 @@ function Header(props) {
         }
     }
 
-    console.log(profilePic)
-
     const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
     useEffect(() => {
         if (width < 710) {

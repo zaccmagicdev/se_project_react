@@ -47,7 +47,13 @@
 }
 
 .itemcard__like-button_liked{
+    position: absolute;
     background: transparent url('../../images/filledheart.svg') center;
+    width: 20px;
+    height: 18px;
+    top: 21px;
+    left: 11px;
+    border: none;
 }
 
 @media(max-width: 425px){

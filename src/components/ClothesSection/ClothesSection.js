@@ -6,10 +6,10 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 function ClothesSection(props) {
 
     let filteredCards = [];
-    const {currentUser} = React.useContext(CurrentUserContext);
+    const { currentUser } = React.useContext(CurrentUserContext);
 
     filteredCards = props.cards.filter((item) => {
-        if(item.owner === currentUser.data._id){
+        if (item.owner === currentUser.data._id) {
             return item;
         }
     })
@@ -22,7 +22,7 @@ function ClothesSection(props) {
             </div>
             <ul className='clothessection__cards'>
                 {filteredCards.map((item, i) => (
-                    <ItemCard key={i} name={item.name} link={item.imageUrl} weather={item.weather} handleCardOpen={props.handleOpenModal} id={item._id} owner={item.owner}/>
+                    <ItemCard key={i} name={item.name} link={item.imageUrl} weather={item.weather} handleCardOpen={props.handleOpenModal} id={item._id} owner={item.owner} onCardLike={props.onCardLike} likes={item.likes} />
                 ))
                 }
             </ul>

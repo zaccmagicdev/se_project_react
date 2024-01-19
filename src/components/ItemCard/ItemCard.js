@@ -1,16 +1,14 @@
 import React from 'react';
 import './ItemCard.css';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function ItemCard(props) {
 
-    function handleLike(e){
+    const { currentUser } = React.useContext(CurrentUserContext);
+
+    function handleLike(e) {
         e.stopPropagation();
         props.onCardLike(props)
-    }
-
-    function testFunction(e){
-        e.stopPropagation();
-        console.log('hi');
     }
 
     const cardImage = {
@@ -23,7 +21,9 @@ function ItemCard(props) {
                 <p className='itemcard__name'>{props.name}</p>
             </div>
             <div className='itemcard__like-button-wrapper'>
-            <button className='itemcard__like-button' onClick={handleLike}/>
+                {currentUser !== null &&
+                    <button className={'itemcard__like-button' + (props.likes.includes(currentUser.data._id) ? '_liked' : '')} onClick={handleLike} />
+                }
             </div>
         </div>
     );

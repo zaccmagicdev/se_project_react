@@ -3,14 +3,14 @@ import ClothesSection from '../ClothesSection/ClothesSection';
 import Sidebar from '../SideBar/Sidebar';
 import './Profile.css';
 
-function Profile(props){
-  
-   return(
+function Profile(props) {
+
+  return (
     <div className='profile'>
-      <Sidebar handleLogOut={props.handleLogOut} handleEditProfile={props.handleEditProfile}/>
-      <ClothesSection handleOpenModal={props.handleOpenModal} cards={props.cards} handleOpenFormModal={props.handleOpenFormModal} />
+      <Sidebar handleLogOut={props.handleLogOut} handleEditProfile={props.handleEditProfile} />
+      <ClothesSection handleOpenModal={props.handleOpenModal} cards={props.cards} handleOpenFormModal={props.handleOpenFormModal} onCardLike={props.onCardLike} />
     </div>
-   );
+  );
 }
 
 export default Profile;

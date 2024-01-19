@@ -70,13 +70,6 @@ function App() {
         setSelectedCard(card);
     };
 
-    const handleCardUpdate = () => {
-        auth.getItems()
-        .then(res => setServerItems(res.data))
-        .then(() => handleCloseModal())
-        .catch(err => console.log(err))
-    };
-
     const handleToggleSwitchChange = () => {
         currentTemperatureUnit === 'F'
             ? setCurrentTemperatureUnit('C')
@@ -85,26 +78,24 @@ function App() {
 
     const handleAddItemSubmit = (name, url, weather) => {
         auth.uploadItem(name, url, weather, localStorage.getItem("jwt"))
-        .then(() => {
-            handleCardUpdate();
-        })
-        .catch(err => console.log(err))
+            .then(res => setServerItems([res.data, ...serverItems]))
+            .then(() => { handleCloseModal() })
+            .catch(err => console.log(err))
     }
 
     const handleDeleteCard = () => {
         auth.deleteItem(selectedCard.id, localStorage.getItem("jwt"))
-        .then(() => {
-           handleCardUpdate();
-        })
+            .then(() => setServerItems(serverItems.filter((item => item._id !== selectedCard.id))))
+            .then(() => handleCloseModal())
+            .catch((err) => console.log(err))
     }
 
     const handleRegistration = (name, avatar, email, password) => {
         auth.register(name, avatar, email, password)
-            .then((res) => {
+            .then(() => {
                 handleCloseModal();
                 handleLogin(email, password)
                 history.push('/profile');
-                console.log(res);
             }).catch(err => console.log(err))
     };
 
@@ -119,7 +110,7 @@ function App() {
                         history.push('/');
                     })
                     .catch((err) => console.log(err));
-            })
+            }).catch((err) => console.log(err))
     }
 
     const handleProfileEdit = (name, avatar) => {
@@ -139,15 +130,24 @@ function App() {
         history.push('/');
     }
 
-    const handleCardLike = ( card ) => {
+    const handleCardLike = (card) => {
         const token = localStorage.getItem("jwt");
-        card.likes.length === 0 ? 
-        auth.likeItem(card.id, token)
-        .then(res => console.log(res))
-        :
-        auth.unlikeItem(card.id, token)
-        .then(res => console.log(res))
-    }; 
+        if (card.likes.length === 0 || !card.likes.includes(currentUser.data._id)) {
+            auth.likeItem(card.id, token)
+                .then((updatedCard) => {
+                    setServerItems(serverItems.map(c =>
+                        c._id === card.id ? updatedCard.data : c))
+                })
+                .catch((err) => console.log(err))
+        } else {
+            auth.unlikeItem(card.id, token)
+                .then((updatedCard) => {
+                    setServerItems(serverItems.map(c =>
+                        c._id === card.id ? updatedCard.data : c))
+                })
+                .catch((err) => console.log(err))
+        }
+    };
 
     useEffect(() => {
         auth.currentUser(localStorage.getItem("jwt"))
@@ -165,7 +165,6 @@ function App() {
         auth.getItems()
             .then((res) => {
                 setServerItems(res.data)
-                console.log(res.data)
             })
             .catch((err) => console.log(err))
     }, [])
@@ -190,10 +189,10 @@ function App() {
                     <Header location={city} handleGarmentClick={handleOpenGarmentModal} handleSignUpClick={handleOpenSignUpModal} handleLogInClick={handleOpenLoginModal} loggedIn={isLoggedIn} />
                     <Switch>
                         <Route exact path="/">
-                            <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} onCardLike={handleCardLike}/>
+                            <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} onCardLike={handleCardLike} />
                         </Route>
                         <ProtectedRoute path="/profile" loggedIn={isLoggedIn}>
-                            <Profile handleOpenModal={selectCard} handleLogOut={handleLogOut} cards={serverItems} handleOpenFormModal={handleOpenGarmentModal} handleEditProfile={handleOpenEditProfileModal} />
+                            <Profile handleOpenModal={selectCard} handleLogOut={handleLogOut} cards={serverItems} handleOpenFormModal={handleOpenGarmentModal} handleEditProfile={handleOpenEditProfileModal} onCardLike={handleCardLike} />
                         </ProtectedRoute>
                     </Switch>
                     <Footer />
@@ -201,7 +200,7 @@ function App() {
                         <AddItemModal handleCloseModal={handleCloseModal} submitMethod={handleAddItemSubmit} />
                     )}
                     {activeModal === "image" && (
-                        <ItemModal link={selectedCard.link} name={selectedCard.name} temp={selectedCard.weather} onClose={handleCloseModal} onDelete={handleDeleteCard} currentCard={selectedCard}/>
+                        <ItemModal link={selectedCard.link} name={selectedCard.name} temp={selectedCard.weather} onClose={handleCloseModal} onDelete={handleDeleteCard} currentCard={selectedCard} />
                     )}
                     {activeModal === "signup" && (
                         <RegisterModal handleCloseModal={handleCloseModal} submitMethod={handleRegistration} handleOpenLogin={handleOpenLoginModal} />

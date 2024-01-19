@@ -4,13 +4,18 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function ItemModal(props) {
 
-    const {currentUser} = React.useContext(CurrentUserContext);
-    const isOwn = props.currentCard.owner === currentUser.data._id;
+    const { currentUser } = React.useContext(CurrentUserContext);
+    let isOwn;
+    if (currentUser !== null) {
+        isOwn = props.currentCard.owner === currentUser.data._id;
+    } else {
+        isOwn = false;
+    }
 
 
     const itemDeleteButtonClassName = (
         `itemmodal__delete-button ${isOwn ? 'itemmodal__delete-button_visible' : 'itemmodal__delete-button_hidden'}`
-      );
+    );
 
     return (
         <div className='itemmodal'>
