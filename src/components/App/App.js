@@ -139,31 +139,15 @@ function App() {
         history.push('/');
     }
 
-    const handleCardLike = ({ id, isLiked }) => {
+    const handleCardLike = ( card ) => {
         const token = localStorage.getItem("jwt");
-        // Check if this card is now liked
-        isLiked
-          ? // if so, send a request to add the user's id to the card's likes array
-            auth
-              // the first argument is the card's id
-              .likeItem(id, token)
-              .then((updatedCard) => {
-                setServerItems((cards) =>
-                  cards.map((c) => (c._id === id ? updatedCard : c))
-                );
-              })
-              .catch((err) => console.log(err))
-          : // if not, send a request to remove the user's id from the card's likes array
-            auth
-              // the first argument is the card's id
-              .unlikeItem(id, token) 
-              .then((updatedCard) => {
-                setServerItems((cards) =>
-                  cards.map((c) => (c._id === id ? updatedCard : c))
-                );
-              })
-              .catch((err) => console.log(err));
-      }; 
+        card.likes.length === 0 ? 
+        auth.likeItem(card.id, token)
+        .then(res => console.log(res))
+        :
+        auth.unlikeItem(card.id, token)
+        .then(res => console.log(res))
+    }; 
 
     useEffect(() => {
         auth.currentUser(localStorage.getItem("jwt"))
@@ -206,7 +190,7 @@ function App() {
                     <Header location={city} handleGarmentClick={handleOpenGarmentModal} handleSignUpClick={handleOpenSignUpModal} handleLogInClick={handleOpenLoginModal} loggedIn={isLoggedIn} />
                     <Switch>
                         <Route exact path="/">
-                            <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} />
+                            <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} onCardLike={handleCardLike}/>
                         </Route>
                         <ProtectedRoute path="/profile" loggedIn={isLoggedIn}>
                             <Profile handleOpenModal={selectCard} handleLogOut={handleLogOut} cards={serverItems} handleOpenFormModal={handleOpenGarmentModal} handleEditProfile={handleOpenEditProfileModal} />

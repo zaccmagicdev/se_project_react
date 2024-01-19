@@ -30,14 +30,20 @@
     color: rgba(0, 0, 0, 0.6);
 }
 
-.itemcard__like-button{
+.itemcard__like-button-wrapper{
     position: relative;
+}
+
+.itemcard__like-button{
+    position: absolute;
+    cursor: pointer;
     background: transparent url('../../images/unfilledheart.svg') center;
     border: none;
     width: 20px;
     height: 18px;
-    top: 20px;
-    left: 5px;
+    top: 21px;
+    left: 11px;
+    z-index: 999;
 }
 
 .itemcard__like-button_liked{
