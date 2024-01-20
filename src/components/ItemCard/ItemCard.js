@@ -22,7 +22,7 @@ function ItemCard(props) {
             </div>
             <div className='itemcard__like-button-wrapper'>
                 {currentUser !== null &&
-                    <button className={'itemcard__like-button' + (props.likes.includes(currentUser.data._id) ? '_liked' : '')} onClick={handleLike} />
+                    <button className={'itemcard__like-button' + (props.likes.includes(currentUser._id) ? '_liked' : '')} onClick={handleLike} />
                 }
             </div>
         </div>

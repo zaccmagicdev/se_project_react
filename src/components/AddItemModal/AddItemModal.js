@@ -29,11 +29,11 @@ function AddItemModal(props){
         <ModalWithForm title="New Garment" name="clothing" buttonName="Add garment" onClose={props.handleCloseModal} handleSubmit={handleSubmit}>
         <label>
             Name
-            <input className="clothing__modal-input" placeholder='Name' type="text" onChange={handleNameChange}></input>
+            <input className="clothing__modal-input" placeholder='Name' type="text" onChange={handleNameChange} value={inputValueName}></input>
         </label>
         <label>
             Image
-            <input className="clothing__modal-input" placeholder='Image URL' type="url" onChange={handleLinkChange}></input>
+            <input className="clothing__modal-input" placeholder='Image URL' type="url" onChange={handleLinkChange} value={inputValueLink}></input>
         </label>
         <section className="clothing__modal-label-radio">
             Select the weather type:

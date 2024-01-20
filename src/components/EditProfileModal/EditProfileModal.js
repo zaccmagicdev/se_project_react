@@ -4,8 +4,8 @@ import './EditProfileModal.css'
 
 function EditProfileModal(props) {
 
-    const [inputValName, setName] = useState('');
-    const [inputValAvatar, setAvatar] = useState('');
+    const [inputValName, setName] = useState(props.name);
+    const [inputValAvatar, setAvatar] = useState(props.avatar);
 
     function handleNameChange(e) {
         setName(e.target.value);
@@ -24,11 +24,11 @@ function EditProfileModal(props) {
         <ModalWithForm title="Change Profile Data" name='edit-profile' buttonName="Save Changes" onClose={props.handleCloseModal} handleSubmit={handleSubmit}>
             <label className='profile-edit__label'>
                 Name*
-                <input className="profile-edit__input" placeholder='Name' type="text" onChange={handleNameChange} required></input>
+                <input className="profile-edit__input" value={inputValName} placeholder='Name' type="text" onChange={handleNameChange} required />
             </label>
             <label className='profile-edit__label'>
                 Avatar URL
-                <input className="profile-edit__input" placeholder='Avatar URL' type="url" onChange={handleAvatarChange}></input>
+                <input className="profile-edit__input" defaultValue={inputValAvatar} placeholder='Avatar URL' type="url" onChange={handleAvatarChange} />
             </label>
         </ModalWithForm>
     );

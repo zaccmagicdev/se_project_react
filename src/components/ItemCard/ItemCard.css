@@ -48,6 +48,7 @@
 
 .itemcard__like-button_liked{
     position: absolute;
+    cursor: pointer;
     background: transparent url('../../images/filledheart.svg') center;
     width: 20px;
     height: 18px;

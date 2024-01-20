@@ -19,13 +19,13 @@ function Header(props) {
 
     if(currentUser !== null){
 
-        if(currentUser.data.avatar.length === 0){
+        if(currentUser.avatar.length === 0){
             profilePic = 
             <div className='header__default-img'>
-                <p className='header__default-initial'>{currentUser.data.name[0]}</p>
+                <p className='header__default-initial'>{currentUser.name[0]}</p>
             </div>
         } else {
-            profilePic = <img className="header__profile-icon" src={currentUser === null ? 'Loading' : currentUser.data.avatar} alt='User Profile Pic' />
+            profilePic = <img className="header__profile-icon" src={currentUser === null ? 'Loading' : currentUser.avatar} alt='User Profile Pic' />
         }
     }
 
@@ -73,12 +73,13 @@ function Header(props) {
                 <ToggleSwitch />
                 <button className="header__add-items-bttn" onClick={props.handleGarmentClick}>+ Add clothes</button>
                 <NavLink exact to="/profile">
-                    <p className="header__username">{currentUser === null ? 'Loading' : currentUser.data.name}</p>
+                    <p className="header__username">{currentUser === null ? 'Loading' : currentUser.name}</p>
                 </NavLink>
                 {profilePic}
             </div>
                 :
                 <div className='header__container'>
+                    <ToggleSwitch />
                     <button className='header__add-items-bttn' onClick={props.handleSignUpClick}>Sign up</button>
                     <button className='header__add-items-bttn' onClick={props.handleLogInClick}>Log in</button>
                 </div> 

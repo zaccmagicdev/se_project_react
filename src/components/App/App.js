@@ -23,7 +23,8 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Switch } from "react-router-dom/cjs/react-router-dom";
 import { Route } from 'react-router-dom';
-import * as auth from '../../auth';
+import * as auth from '../../utils/auth';
+import * as api from '../../utils/api';
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
     const [currentUser, setCurrentUser] = useState(null);
 
     //history object
-    let history = useHistory();
+    const history = useHistory();
 
     //handlers
     const handleOpenGarmentModal = () => {
@@ -77,14 +78,14 @@ function App() {
     };
 
     const handleAddItemSubmit = (name, url, weather) => {
-        auth.uploadItem(name, url, weather, localStorage.getItem("jwt"))
+        api.uploadItem(name, url, weather, localStorage.getItem("jwt"))
             .then(res => setServerItems([res.data, ...serverItems]))
             .then(() => { handleCloseModal() })
             .catch(err => console.log(err))
     }
 
     const handleDeleteCard = () => {
-        auth.deleteItem(selectedCard.id, localStorage.getItem("jwt"))
+        api.deleteItem(selectedCard.id, localStorage.getItem("jwt"))
             .then(() => setServerItems(serverItems.filter((item => item._id !== selectedCard.id))))
             .then(() => handleCloseModal())
             .catch((err) => console.log(err))
@@ -102,9 +103,9 @@ function App() {
     const handleLogin = (email, password) => {
         auth.authorize(email, password)
             .then(() => {
-                auth.currentUser(localStorage.getItem("jwt"))
+                api.currentUser(localStorage.getItem("jwt"))
                     .then((res) => {
-                        setCurrentUser(res)
+                        setCurrentUser(res.data)
                         handleCloseModal();
                         setLogIn(true)
                         history.push('/');
@@ -114,10 +115,9 @@ function App() {
     }
 
     const handleProfileEdit = (name, avatar) => {
-        auth.updateInfo(name, avatar, localStorage.getItem("jwt"))
+        api.updateInfo(name, avatar, localStorage.getItem("jwt"))
             .then((res) => {
-                currentUser.data.name = res.name;
-                currentUser.data.avatar = res.avatar;
+                setCurrentUser(res)
             })
             .then(() => { handleCloseModal(); })
             .catch((err) => console.log(err))
@@ -132,15 +132,15 @@ function App() {
 
     const handleCardLike = (card) => {
         const token = localStorage.getItem("jwt");
-        if (card.likes.length === 0 || !card.likes.includes(currentUser.data._id)) {
-            auth.likeItem(card.id, token)
+        if (card.likes.length === 0 || !card.likes.includes(currentUser._id)) {
+            api.likeItem(card.id, token)
                 .then((updatedCard) => {
                     setServerItems(serverItems.map(c =>
                         c._id === card.id ? updatedCard.data : c))
                 })
                 .catch((err) => console.log(err))
         } else {
-            auth.unlikeItem(card.id, token)
+            api.unlikeItem(card.id, token)
                 .then((updatedCard) => {
                     setServerItems(serverItems.map(c =>
                         c._id === card.id ? updatedCard.data : c))
@@ -150,19 +150,21 @@ function App() {
     };
 
     useEffect(() => {
-        auth.currentUser(localStorage.getItem("jwt"))
+        api.currentUser(localStorage.getItem("jwt"))
             .then((res) => {
                 if (res.data) {
                     setLogIn(true)
+                    setCurrentUser(res.data)
+                } else {
+                    setCurrentUser(null)
                 }
-                setCurrentUser(res)
             })
             .catch((err) => { console.log(err) })
 
     }, []);
 
     useEffect(() => {
-        auth.getItems()
+        api.getItems()
             .then((res) => {
                 setServerItems(res.data)
             })
@@ -209,7 +211,7 @@ function App() {
                         <LoginModal handleCloseModal={handleCloseModal} submitMethod={handleLogin} handleOpenRegistration={handleOpenSignUpModal} />
                     )}
                     {activeModal === "edit" && (
-                        <EditProfileModal handleCloseModal={handleCloseModal} submitMethod={handleProfileEdit} />
+                        <EditProfileModal handleCloseModal={handleCloseModal} submitMethod={handleProfileEdit} name={currentUser.name} avatar={currentUser.avatar}/>
                     )}
                 </CurrentTemperatureUnitContext.Provider>
             </CurrentUserContext.Provider>

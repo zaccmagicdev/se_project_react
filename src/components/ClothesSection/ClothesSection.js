@@ -9,7 +9,7 @@ function ClothesSection(props) {
     const { currentUser } = React.useContext(CurrentUserContext);
 
     filteredCards = props.cards.filter((item) => {
-        if (item.owner === currentUser.data._id) {
+        if (item.owner === currentUser._id) {
             return item;
         }
     })

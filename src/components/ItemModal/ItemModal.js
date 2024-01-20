@@ -7,7 +7,7 @@ function ItemModal(props) {
     const { currentUser } = React.useContext(CurrentUserContext);
     let isOwn;
     if (currentUser !== null) {
-        isOwn = props.currentCard.owner === currentUser.data._id;
+        isOwn = props.currentCard.owner === currentUser._id;
     } else {
         isOwn = false;
     }
