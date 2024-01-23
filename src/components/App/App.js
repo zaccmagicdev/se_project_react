@@ -41,8 +41,7 @@ function App() {
     const [serverItems, setServerItems] = useState(null);
     const [isLoggedIn, setLogIn] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
-
-    console.log(currentUser);
+    
     //history object
     const history = useHistory();
 
