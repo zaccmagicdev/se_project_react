@@ -2,7 +2,7 @@ import * as React from 'react';
 import './SideBar.css';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Sidebar(props) {
+function SideBar(props) {
 
     let profilePic;
     const { currentUser } = React.useContext(CurrentUserContext)
@@ -29,4 +29,4 @@ function Sidebar(props) {
     )
 }
 
-export default Sidebar;
+export default SideBar;

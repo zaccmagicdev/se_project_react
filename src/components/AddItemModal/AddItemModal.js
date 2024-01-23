@@ -1,5 +1,6 @@
 import * as React from 'react';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
+import './AddItemModal.js';
 
 function AddItemModal(props){
 

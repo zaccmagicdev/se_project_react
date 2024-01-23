@@ -1,6 +1,7 @@
 import React from "react";
 import './WeatherCard.css'
 import { backgrounds } from "../../utils/constants";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 //here we will want to add props to take in the API output
 //now how are we going to implement the dynamic cards
