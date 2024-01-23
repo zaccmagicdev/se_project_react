@@ -48,7 +48,7 @@ function RegisterModal(props) {
                 Avatar URL
                 <input className="registration__modal-input" placeholder='Avatar URL' type="url" onChange={handleAvatarChange} value={inputValAvatar}/>
             </label>
-            <button className="registration__modal-login-button" onClick={props.handleOpenLogin}>or Log in</button>
+            <button type="button className="registration__modal-login-button" onClick={props.handleOpenLogin}>or Log in</button>
         </ModalWithForm>
     );
 }
