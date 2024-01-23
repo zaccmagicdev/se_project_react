@@ -42,6 +42,7 @@ function App() {
     const [isLoggedIn, setLogIn] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
 
+    console.log(currentUser);
     //history object
     const history = useHistory();
 
@@ -103,7 +104,7 @@ function App() {
     const handleLogin = (email, password) => {
         auth.authorize(email, password)
             .then(() => {
-                api.currentUser(localStorage.getItem("jwt"))
+                api.checkToken(localStorage.getItem("jwt"))
                     .then((res) => {
                         setCurrentUser(res.data)
                         handleCloseModal();
@@ -117,6 +118,7 @@ function App() {
     const handleProfileEdit = (name, avatar) => {
         api.updateInfo(name, avatar, localStorage.getItem("jwt"))
             .then((res) => {
+                console.log(res)
                 setCurrentUser(res)
             })
             .then(() => { handleCloseModal(); })
@@ -150,7 +152,7 @@ function App() {
     };
 
     useEffect(() => {
-        api.currentUser(localStorage.getItem("jwt"))
+        api.checkToken(localStorage.getItem("jwt"))
             .then((res) => {
                 if (res.data) {
                     setLogIn(true)

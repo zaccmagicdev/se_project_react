@@ -1,5 +1,6 @@
-export const BASE_URL = 'http://localhost:3001';
+import { processServerResponse } from "./weatherAPI";
 
+export const BASE_URL = 'http://localhost:3001';
 
 //user based commands
 export const register = (name, avatar, email, password) => {
@@ -11,13 +12,7 @@ export const register = (name, avatar, email, password) => {
     },
     body: JSON.stringify({ name, avatar, email, password })
   })
-    .then((response) => {
-      return response.json();
-    })
-    .then((res) => {
-      return res;
-    })
-    .catch((err) => console.log(err));
+    .then(processServerResponse)
 };
 
 export const authorize = (email, password) => {
@@ -28,7 +23,7 @@ export const authorize = (email, password) => {
     },
     body: JSON.stringify({ email, password }),
   })
-    .then((response) => response.json())
+    .then(processServerResponse)
     .then((data) => {
       if (data.token) {
         localStorage.setItem("jwt", data.token);

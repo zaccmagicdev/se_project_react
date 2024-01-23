@@ -28,7 +28,7 @@ function EditProfileModal(props) {
             </label>
             <label className='profile-edit__label'>
                 Avatar URL
-                <input className="profile-edit__input" defaultValue={inputValAvatar} placeholder='Avatar URL' type="url" onChange={handleAvatarChange} />
+                <input className="profile-edit__input" value={inputValAvatar} placeholder='Avatar URL' type="url" onChange={handleAvatarChange} />
             </label>
         </ModalWithForm>
     );

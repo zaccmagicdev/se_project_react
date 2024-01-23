@@ -1,6 +1,6 @@
 import { apiKey } from "./constants";
 
-const processServerResponse = (res) => { 
+export const processServerResponse = (res) => { 
     if (res.ok) { 
       return res.json(); 
     } 
