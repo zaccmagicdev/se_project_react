@@ -11,7 +11,7 @@
 .itemmodal__container{
     background-color: white;
     box-sizing: border-box;
-    margin: 195px auto;
+    margin: 50px auto;
     width: 498px;
     height: 610px;
     border-radius: 10px;
@@ -35,6 +35,12 @@
     left: 457px;
     top: 17px;
     cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+    filter: invert();
+}
+
+.itemmodal__close-btn:hover{
+    transform: rotate(180deg);
 }
 
 .itemmodal__img{

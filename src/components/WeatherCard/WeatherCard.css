@@ -1,6 +1,5 @@
 .weathercard{
     /*this will eventually be rewritten to properly resize for responsive implimentation*/
-    margin-top: 28px;
     background-size: cover;
     height: 80px;
     width: 100%;

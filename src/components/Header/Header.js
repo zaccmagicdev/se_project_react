@@ -63,7 +63,7 @@ function Header(props) {
             <header className="header">
                 <div className='header__container'>
                     <NavLink exact to="/">
-                        <img src={headerLogo} alt='What to Wear?' />
+                        <img className='header__button' src={headerLogo} alt='What to Wear?' />
                     </NavLink>
                     <p className="header__date-time">{currentDate}, {props.location}</p>
                 </div>
@@ -71,9 +71,9 @@ function Header(props) {
                 
                 <div className='header__container'>
                 <ToggleSwitch />
-                <button className="header__add-items-bttn" onClick={props.handleGarmentClick}>+ Add clothes</button>
+                <button className="header__button header__add-items-bttn" onClick={props.handleGarmentClick}>+ Add clothes</button>
                 <NavLink exact to="/profile">
-                    <p className="header__username">{currentUser === null ? 'Loading' : currentUser.name}</p>
+                    <p className="header__button header__username">{currentUser === null ? 'Loading' : currentUser.name}</p>
                 </NavLink>
                 {profilePic}
             </div>

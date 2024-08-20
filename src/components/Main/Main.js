@@ -6,6 +6,7 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 
 function Main(props) {
 
+    
     let filteredCards = [];
     const { currentTemperatureUnit } = React.useContext(CurrentTemperatureUnitContext);
 
@@ -36,7 +37,7 @@ function Main(props) {
     }
 
     return (
-        <main>
+        <main className="main__container">
             <WeatherCard temp={unitTempInfo} time={timeOfDay} weather={props.weather} />
             <p>It is currently {unitTempInfo}, you may want to wear:</p>
             {props.cards !== null &&
