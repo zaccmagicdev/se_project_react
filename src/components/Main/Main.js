@@ -1,5 +1,6 @@
 import React from "react";
 import WeatherCard from "../WeatherCard/WeatherCard";
+import weatherAPI from "../../utils/weatherAPI";
 import ItemCard from "../ItemCard/ItemCard";
 import './Main.css';
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
@@ -8,13 +9,16 @@ import  geocodeapi  from "../../utils/geocodeapi";
 function Main(props) {
 
     const [searchedCity, setSearchedCity] = React.useState("");
+    const [lat, setLat] = React.useState(0);
+    const [lon, setLon] = React.useState(0);
 
     function handleCityChange(e) {
         setSearchedCity(e.target.value);
     }
 
     function searchCity(city){
-        geocodeapi(city).then(res => console.log(res))
+        geocodeapi(city).then((res) => {setLat(res.lat); setLon(res.lon)});
+        weatherAPI(lat, lon).then(res => console.log(res))
     }
 
     let filteredCards = [];
