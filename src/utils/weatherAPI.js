@@ -12,4 +12,4 @@ async function weatherAPI() {
         .then(processServerResponse);
 }
 
-export default weatherAPI;
+export default {weatherAPI, processServerResponse};

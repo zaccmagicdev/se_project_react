@@ -173,7 +173,7 @@ function App() {
     }, [])
 
     //calling apis
-    useEffect(() => {
+    /*useEffect(() => {
         weatherAPI().then((res) => {
             setTemp(Math.round(res.main.temp));
             setCity(res.name);
@@ -181,7 +181,7 @@ function App() {
             setSunrise(res.sys.sunrise);
             setSunset(res.sys.sunset);
         }).catch(err => console.log(err));
-    }, []);
+    }, []);*/
 
     return (
         <div className="App">
