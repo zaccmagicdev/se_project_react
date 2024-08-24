@@ -12,7 +12,8 @@
     border-bottom-left-radius: 30px;
     border: 2px solid grey;
     padding: 4px;
-    font-size: 20px;
+    font-size: 18px;
+    padding-left: 12px;
 }
 
 .searchbar__submit{

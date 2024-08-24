@@ -10,6 +10,7 @@ function SearchBar(props) {
     }
 
     function setData(e){
+        console.log(input)
         e.preventDefault();
        props.onData(input)
     }

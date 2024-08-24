@@ -155,9 +155,7 @@ function App() {
 
     function handleSearchSubmit(data){
         setSearchValue(data);
-        useEffect(() => {
-            console.log(searchValue)
-        }, [])
+        console.log(searchValue)
     }
     
 //API Calls
