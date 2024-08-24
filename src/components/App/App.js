@@ -17,7 +17,6 @@ import ItemModal from "../ItemModal/ItemModal";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
-import weatherAPI from "../../utils/weatherAPI";
 import Profile from "../Profile/Profile";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -26,6 +25,7 @@ import { Route } from 'react-router-dom';
 import * as auth from '../../utils/auth';
 import * as api from '../../utils/api';
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import SearchBar from "../SearchBar/SearchBar";
 
 function App() {
 
@@ -41,7 +41,10 @@ function App() {
     const [serverItems, setServerItems] = useState(null);
     const [isLoggedIn, setLogIn] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
+    const [searchValue, setSearchValue] = useState("");
     
+    console.log(searchValue);
+
     //history object
     const history = useHistory();
 
@@ -131,7 +134,7 @@ function App() {
         history.push('/');
     }
 
-    const handleCardLike = (card) => {
+    function handleCardLike(card){
         const token = localStorage.getItem("jwt");
         if (card.likes.length === 0 || !card.likes.includes(currentUser._id)) {
             api.likeItem(card.id, token)
@@ -150,6 +153,11 @@ function App() {
         }
     };
 
+    function handleSearchSubmit(data){
+        setSearchValue(data);
+    }
+    
+//API Calls
     useEffect(() => {
         api.checkToken(localStorage.getItem("jwt"))
             .then((res) => {
@@ -192,6 +200,7 @@ function App() {
                     <Header location={city} handleGarmentClick={handleOpenGarmentModal} handleSignUpClick={handleOpenSignUpModal} handleLogInClick={handleOpenLoginModal} loggedIn={isLoggedIn} />
                     <Switch>
                         <Route exact path="/">
+                        <SearchBar onData={handleSearchSubmit}/>
                             <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} onCardLike={handleCardLike} />
                         </Route>
                         <ProtectedRoute path="/profile" loggedIn={isLoggedIn}>

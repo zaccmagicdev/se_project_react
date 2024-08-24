@@ -1,0 +1,30 @@
+.searchbar{
+    height: 30px;
+    display: flex;
+    margin: 0;
+    justify-content: center;
+}
+
+#searchbar-input{
+    height: 100%;
+    box-sizing: border-box;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border: 2px solid grey;
+    padding: 4px;
+    font-size: 20px;
+}
+
+.searchbar__submit{
+    height: 100%;
+    background: lightgrey url("../../images/search-alt-2-svgrepo-com.svg") center no-repeat;
+    border: 2px solid grey;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    width: 40px;
+    cursor: pointer;
+}
+
+.searchbar__submit:hover{
+    opacity: 70%;
+}

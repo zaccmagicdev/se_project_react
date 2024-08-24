@@ -1,4 +1,4 @@
-import { processServerResponse } from "./weatherAPI";
+import { _processServerResponse } from "./constants";
 
 export const BASE_URL = 'http://localhost:3001';
 
@@ -11,7 +11,6 @@ export const checkToken = (token) => {
       authorization: `Bearer ${token}`
     },
   })
-    .then(processServerResponse)
 };
 
 export const updateInfo = (name, avatar, token) => {
@@ -26,7 +25,6 @@ export const updateInfo = (name, avatar, token) => {
       avatar: avatar
     })
   })
-    .then(processServerResponse)
 };
 
 //item based commands
@@ -38,7 +36,7 @@ export const getItems = () => {
       "Content-Type": "application/json"
     },
   })
-    .then(processServerResponse)
+    .then(_processServerResponse)
 };
 
 export const uploadItem = (name, imageUrl, weather, token) => {
@@ -50,7 +48,7 @@ export const uploadItem = (name, imageUrl, weather, token) => {
     },
     body: JSON.stringify({ name, imageUrl, weather })
   })
-    .then(processServerResponse)
+    .then(_processServerResponse)
 };
 
 export const deleteItem = (id, token) => {
@@ -61,7 +59,7 @@ export const deleteItem = (id, token) => {
       authorization: `Bearer ${token}`
     },
   })
-    .then(processServerResponse)
+    .then(_processServerResponse)
 };
 
 export const likeItem = (id, token) => {
@@ -72,7 +70,7 @@ export const likeItem = (id, token) => {
       authorization: `Bearer ${token}`
     },
   })
-    .then(processServerResponse)
+    .then(_processServerResponse)
 };
 
 export const unlikeItem = (id, token) => {
@@ -83,5 +81,5 @@ export const unlikeItem = (id, token) => {
       authorization: `Bearer ${token}`
     },
   })
-    .then(processServerResponse)
+    .then(_processServerResponse)
 };

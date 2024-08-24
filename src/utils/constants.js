@@ -22,5 +22,13 @@
 //we can rewrite the weather card as containers with the appropriate vector groups on the right and picking the color depending on the weather/time of day
 
   const apiKey = "bb1a34b30e91f6493febc3872715ffc5";
+  const newApiKey = "30f7c7b473a0459bacc175749242208";
 
-  export {apiKey, backgrounds};
+  const _processServerResponse = (res) => { 
+    if (res.ok) { 
+      return res.json(); 
+    } 
+    return Promise.reject(`Error: ${res.status}`); 
+}
+
+  export {apiKey, newApiKey, backgrounds, _processServerResponse};
