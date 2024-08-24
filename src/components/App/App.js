@@ -24,12 +24,14 @@ import { Switch } from "react-router-dom/cjs/react-router-dom";
 import { Route } from 'react-router-dom';
 import * as auth from '../../utils/auth';
 import * as api from '../../utils/api';
+import newWeatherAPI from "../../utils/newweatherapi";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import SearchBar from "../SearchBar/SearchBar";
 
 function App() {
 
     //API hooks and functionality hooks
+    const [, forceUpdate] = React.useReducer(o => !o);
     const [activeModal, setActiveModal] = useState("");
     const [selectedCard, setSelectedCard] = useState({});
     const [temp, setTemp] = useState(0);
@@ -42,8 +44,6 @@ function App() {
     const [isLoggedIn, setLogIn] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
     const [searchValue, setSearchValue] = useState("");
-    
-    console.log(searchValue);
 
     //history object
     const history = useHistory();
@@ -155,6 +155,9 @@ function App() {
 
     function handleSearchSubmit(data){
         setSearchValue(data);
+        useEffect(() => {
+            console.log(searchValue)
+        }, [])
     }
     
 //API Calls
@@ -179,6 +182,7 @@ function App() {
             })
             .catch((err) => console.log(err))
     }, [])
+
 
     //calling apis
     /*useEffect(() => {
