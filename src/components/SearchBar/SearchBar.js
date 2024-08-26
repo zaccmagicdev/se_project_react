@@ -9,16 +9,15 @@ function SearchBar(props) {
         setInput(e.target.value)
     }
 
-    function setData(e){
-        console.log(input)
+    function setData(e) {
         e.preventDefault();
-       props.onData(input)
+        props.onData(input)
     }
 
     return (
         <form className='searchbar' onSubmit={setData}>
             <label for="seachbar-input">
-                <input required type="text" id="searchbar-input"placeholder='Search for any location...' onChange={handleInputChange}/>
+                <input required type="text" id="searchbar-input" placeholder='Search for any location...' onChange={handleInputChange} />
             </label>
             <button className="searchbar__submit" type="submit" />
         </form>

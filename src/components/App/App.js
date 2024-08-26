@@ -31,11 +31,11 @@ import SearchBar from "../SearchBar/SearchBar";
 function App() {
 
     //API hooks and functionality hooks
-    const [, forceUpdate] = React.useReducer(o => !o);
     const [activeModal, setActiveModal] = useState("");
     const [selectedCard, setSelectedCard] = useState({});
     const [temp, setTemp] = useState(0);
     const [city, setCity] = useState("");
+    const [country, setCountry] = useState("");
     const [weather, setWeather] = useState("");
     const [sunrise, setSunrise] = useState(0);
     const [sunset, setSunset] = useState(0);
@@ -43,7 +43,8 @@ function App() {
     const [serverItems, setServerItems] = useState(null);
     const [isLoggedIn, setLogIn] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
-    const [searchValue, setSearchValue] = useState("");
+    const [searchResult, setSearchResult] = useState([{}]);
+
 
     //history object
     const history = useHistory();
@@ -134,7 +135,7 @@ function App() {
         history.push('/');
     }
 
-    function handleCardLike(card){
+    function handleCardLike(card) {
         const token = localStorage.getItem("jwt");
         if (card.likes.length === 0 || !card.likes.includes(currentUser._id)) {
             api.likeItem(card.id, token)
@@ -153,12 +154,24 @@ function App() {
         }
     };
 
-    function handleSearchSubmit(data){
-        setSearchValue(data);
-        console.log(searchValue)
+    function handleSearchSubmit(data) {
+
+        newWeatherAPI(data).then((res) => {
+            setSearchResult(res)
+            console.log(res)
+        }).catch(e => console.error(e))
     }
-    
-//API Calls
+
+    useEffect(() => {
+        if (!(searchResult.length <=1)) {
+          setCity(searchResult.location.name)
+          setCountry(searchResult.location.country)
+          setTemp(searchResult.current.temp_f)
+          console.log(searchResult)
+        }
+    }, [searchResult]);
+
+    //API Calls
     useEffect(() => {
         api.checkToken(localStorage.getItem("jwt"))
             .then((res) => {
@@ -199,10 +212,10 @@ function App() {
                 <CurrentTemperatureUnitContext.Provider
                     value={{ currentTemperatureUnit, handleToggleSwitchChange }}
                 >
-                    <Header location={city} handleGarmentClick={handleOpenGarmentModal} handleSignUpClick={handleOpenSignUpModal} handleLogInClick={handleOpenLoginModal} loggedIn={isLoggedIn} />
+                    <Header location={city} country={country} handleGarmentClick={handleOpenGarmentModal} handleSignUpClick={handleOpenSignUpModal} handleLogInClick={handleOpenLoginModal} loggedIn={isLoggedIn} />
                     <Switch>
                         <Route exact path="/">
-                        <SearchBar onData={handleSearchSubmit}/>
+                            <SearchBar onData={handleSearchSubmit} />
                             <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} onCardLike={handleCardLike} />
                         </Route>
                         <ProtectedRoute path="/profile" loggedIn={isLoggedIn}>
@@ -223,7 +236,7 @@ function App() {
                         <LoginModal handleCloseModal={handleCloseModal} submitMethod={handleLogin} handleOpenRegistration={handleOpenSignUpModal} />
                     )}
                     {activeModal === "edit" && (
-                        <EditProfileModal handleCloseModal={handleCloseModal} submitMethod={handleProfileEdit} name={currentUser.name} avatar={currentUser.avatar}/>
+                        <EditProfileModal handleCloseModal={handleCloseModal} submitMethod={handleProfileEdit} name={currentUser.name} avatar={currentUser.avatar} />
                     )}
                 </CurrentTemperatureUnitContext.Provider>
             </CurrentUserContext.Provider>

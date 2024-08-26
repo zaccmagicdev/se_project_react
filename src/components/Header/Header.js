@@ -65,7 +65,7 @@ function Header(props) {
                     <NavLink exact to="/">
                         <img className='header__button' src={headerLogo} alt='What to Wear?' />
                     </NavLink>
-                    <p className="header__date-time">{currentDate}, {props.location}</p>
+                    <p className="header__date-time">{currentDate}, {props.location}, {props.country}</p>
                 </div>
                 {props.loggedIn ? 
                 

@@ -19,6 +19,8 @@
     {url: require("../images/Group 148.svg").default, timeOfDay: "night", weather: "fog", color: "rgba(40, 104, 151, 1)"},
 ];
 
+const countryFlags = [{}]
+
 //we can rewrite the weather card as containers with the appropriate vector groups on the right and picking the color depending on the weather/time of day
 
   const apiKey = "bb1a34b30e91f6493febc3872715ffc5";
