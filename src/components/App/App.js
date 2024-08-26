@@ -45,7 +45,6 @@ function App() {
     const [currentUser, setCurrentUser] = useState(null);
     const [searchResult, setSearchResult] = useState([{}]);
 
-
     //history object
     const history = useHistory();
 
@@ -109,6 +108,7 @@ function App() {
             .then(() => {
                 api.checkToken(localStorage.getItem("jwt"))
                     .then((res) => {
+                        console.log(res)
                         setCurrentUser(res.data)
                         handleCloseModal();
                         setLogIn(true)
