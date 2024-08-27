@@ -4,6 +4,7 @@ import ItemCard from "../ItemCard/ItemCard";
 import './Main.css';
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
+
 function Main(props) {
 
     let filteredCards = [];

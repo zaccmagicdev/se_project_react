@@ -18,6 +18,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import Profile from "../Profile/Profile";
+import { defaultClothingItems } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Switch } from "react-router-dom/cjs/react-router-dom";
@@ -44,6 +45,7 @@ function App() {
     const [isLoggedIn, setLogIn] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
     const [searchResult, setSearchResult] = useState([{}]);
+    const [searchMade, handleSearchMade] = useState(false);
 
     //history object
     const history = useHistory();
@@ -155,7 +157,6 @@ function App() {
     };
 
     function handleSearchSubmit(data) {
-
         newWeatherAPI(data).then((res) => {
             setSearchResult(res)
             console.log(res)
@@ -164,6 +165,7 @@ function App() {
 
     useEffect(() => {
         if (!(searchResult.length <=1)) {
+        handleSearchMade(true);
           setCity(searchResult.location.name)
           setCountry(searchResult.location.country)
           setTemp(searchResult.current.temp_f)
@@ -187,11 +189,15 @@ function App() {
     }, []);
 
     useEffect(() => {
+        if(currentUser !== null){
         api.getItems()
             .then((res) => {
                 setServerItems(res.data)
             })
             .catch((err) => console.log(err))
+        } else {
+            setServerItems(defaultClothingItems)
+        }
     }, [])
 
 
@@ -216,7 +222,7 @@ function App() {
                     <Switch>
                         <Route exact path="/">
                             <SearchBar onData={handleSearchSubmit} />
-                            <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} onCardLike={handleCardLike} />
+                            {searchMade && <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} onCardLike={handleCardLike} />}
                         </Route>
                         <ProtectedRoute path="/profile" loggedIn={isLoggedIn}>
                             <Profile handleOpenModal={selectCard} handleLogOut={handleLogOut} cards={serverItems} handleOpenFormModal={handleOpenGarmentModal} handleEditProfile={handleOpenEditProfileModal} onCardLike={handleCardLike} />

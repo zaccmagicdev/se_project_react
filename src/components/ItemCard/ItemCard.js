@@ -11,6 +11,8 @@ function ItemCard(props) {
         props.onCardLike(props)
     }
 
+    console.log(props.link)
+
     const cardImage = {
         backgroundImage: 'url(' + props.link + ')',
     };
