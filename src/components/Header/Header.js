@@ -87,8 +87,8 @@ function Header(props) {
             </div>
                 :
                 <div className='header__container'>
-                    <ToggleSwitch className='header__toggleswitch__temp' label='temp' handleCallback={handleWeatherSwitchChange} />
-                    <ToggleSwitch className="header__toggleswitch__theme" label='colortheme'/>
+                    <ToggleSwitch className='header__toggleswitch__temp' label='Celcius?' handleCallback={handleWeatherSwitchChange} />
+                    <ToggleSwitch className="header__toggleswitch__theme" label='Dark?'/>
                     <button className='header__button header__add-items-bttn' onClick={props.handleSignUpClick}>Sign up</button>
                     <button className='header__button header__add-items-bttn' onClick={props.handleLogInClick}>Log in</button>
                 </div> 
