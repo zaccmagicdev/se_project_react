@@ -5,7 +5,9 @@ import profileImage from '../../images/profile-img.jpg';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
 const { flag } = require('country-emoji');
+
 
 //when the menu is actually open for the modal we can mount it and make it's z index on top
 
@@ -17,6 +19,8 @@ function Header(props) {
     const [mobileModalOpened, toggleModalMenu] = useState(false);
     const {currentUser} = React.useContext(CurrentUserContext);
     let profilePic;
+
+    const { handleWeatherSwitchChange } = React.useContext(CurrentTemperatureUnitContext);
 
     if(currentUser !== null){
 
@@ -83,7 +87,8 @@ function Header(props) {
             </div>
                 :
                 <div className='header__container'>
-                    <ToggleSwitch />
+                    <ToggleSwitch className='header__toggleswitch__temp' label='temp' handleCallback={handleWeatherSwitchChange} />
+                    <ToggleSwitch className="header__toggleswitch__theme" label='colortheme'/>
                     <button className='header__button header__add-items-bttn' onClick={props.handleSignUpClick}>Sign up</button>
                     <button className='header__button header__add-items-bttn' onClick={props.handleLogInClick}>Log in</button>
                 </div> 

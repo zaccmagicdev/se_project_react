@@ -8,6 +8,11 @@
     line-height: 1.2;
 }
 
+p{
+    mix-blend-mode: difference;
+    filter: invert(1);
+}
+
 .App{
     font-size: 20px;
     height: 100vh;

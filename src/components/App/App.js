@@ -74,7 +74,7 @@ function App() {
         setSelectedCard(card);
     };
 
-    const handleToggleSwitchChange = () => {
+    const handleWeatherSwitchChange = () => {
         currentTemperatureUnit === 'F'
             ? setCurrentTemperatureUnit('C')
             : setCurrentTemperatureUnit('F');
@@ -210,7 +210,7 @@ function App() {
         <div className="App">
             <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
                 <CurrentTemperatureUnitContext.Provider
-                    value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+                    value={{ currentTemperatureUnit, handleWeatherSwitchChange }}
                 >
                     <Header location={city} country={country} handleGarmentClick={handleOpenGarmentModal} handleSignUpClick={handleOpenSignUpModal} handleLogInClick={handleOpenLoginModal} loggedIn={isLoggedIn} />
                     <Switch>
