@@ -5,6 +5,7 @@ import profileImage from '../../images/profile-img.jpg';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+const { flag } = require('country-emoji');
 
 //when the menu is actually open for the modal we can mount it and make it's z index on top
 
@@ -29,7 +30,7 @@ function Header(props) {
         }
     }
 
-    const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
+    const currentDate = new Date().toLocaleString('en-us', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'});
     useEffect(() => {
         if (width < 710) {
             toggleMobileMenu(true);
@@ -65,7 +66,10 @@ function Header(props) {
                     <NavLink exact to="/">
                         <img className='header__button' src={headerLogo} alt='What to Wear?' />
                     </NavLink>
-                    <p className="header__date-time">{currentDate}, {props.location}, {props.country}</p>
+                    <div className='header__info-container'>
+                    <p className="header__date-time">{currentDate}</p>
+                    <p className='header__date-time'>{props.location !== '' ? `${props.location}, ${props.country} ${flag(props.country)}` : ''}</p>
+                    </div>
                 </div>
                 {props.loggedIn ? 
                 

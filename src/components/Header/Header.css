@@ -13,6 +13,11 @@
     gap: 18px;
 }
 
+.header__info-container{
+    display: flex;
+    flex-direction: column;
+}
+
 .header__date-time{
     margin: 0;
 }
