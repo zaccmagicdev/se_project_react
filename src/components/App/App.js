@@ -21,6 +21,7 @@ import Profile from "../Profile/Profile";
 import { defaultClothingItems } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { CurrentThemeContext } from "../../contexts/CurrentThemeContext";
 import { Switch } from "react-router-dom/cjs/react-router-dom";
 import { Route } from 'react-router-dom';
 import * as auth from '../../utils/auth';
@@ -46,6 +47,7 @@ function App() {
     const [currentUser, setCurrentUser] = useState(null);
     const [searchResult, setSearchResult] = useState([{}]);
     const [searchMade, handleSearchMade] = useState(false);
+    const [theme, setTheme] = useState('light')
 
     //history object
     const history = useHistory();
@@ -163,13 +165,16 @@ function App() {
         }).catch(e => console.error(e))
     }
 
+    function handleColorThemeChange(){
+        theme === 'light' ? setTheme('dark') : setTheme('light')
+    }
+
     useEffect(() => {
         if (!(searchResult.length <=1)) {
         handleSearchMade(true);
           setCity(searchResult.location.name)
           setCountry(searchResult.location.country)
           setTemp(searchResult.current.temp_f)
-          console.log(searchResult)
         }
     }, [searchResult]);
 
@@ -200,20 +205,10 @@ function App() {
         }
     }, [])
 
-
-    //calling apis
-    /*useEffect(() => {
-        weatherAPI().then((res) => {
-            setTemp(Math.round(res.main.temp));
-            setCity(res.name);
-            setWeather(res.weather[0].main);
-            setSunrise(res.sys.sunrise);
-            setSunset(res.sys.sunset);
-        }).catch(err => console.log(err));
-    }, []);*/
-
     return (
-        <div className="App">
+        <div className={`App App__${theme}`}>
+            <div className="App__Container">
+            <CurrentThemeContext.Provider value={{theme, handleColorThemeChange}}>
             <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
                 <CurrentTemperatureUnitContext.Provider
                     value={{ currentTemperatureUnit, handleWeatherSwitchChange }}
@@ -246,6 +241,8 @@ function App() {
                     )}
                 </CurrentTemperatureUnitContext.Provider>
             </CurrentUserContext.Provider>
+            </CurrentThemeContext.Provider >
+            </div>
         </div>
     );
 }

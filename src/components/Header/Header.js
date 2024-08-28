@@ -6,6 +6,7 @@ import './Header.css';
 import { NavLink } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
+import { CurrentThemeContext } from '../../contexts/CurrentThemeContext';
 const { flag } = require('country-emoji');
 
 
@@ -17,24 +18,26 @@ function Header(props) {
 
     const [isMobileMenuOpened, toggleMobileMenu] = useState(false);
     const [mobileModalOpened, toggleModalMenu] = useState(false);
-    const {currentUser} = React.useContext(CurrentUserContext);
+    const { currentUser } = React.useContext(CurrentUserContext);
     let profilePic;
 
     const { handleWeatherSwitchChange } = React.useContext(CurrentTemperatureUnitContext);
+    const { handleColorThemeChange } = React.useContext(CurrentThemeContext);
 
-    if(currentUser !== null){
 
-        if(currentUser.avatar.length === 0){
-            profilePic = 
-            <div className='header__default-img'>
-                <p className='header__default-initial'>{currentUser.name[0]}</p>
-            </div>
+    if (currentUser !== null) {
+
+        if (currentUser.avatar.length === 0) {
+            profilePic =
+                <div className='header__default-img'>
+                    <p className='header__default-initial'>{currentUser.name[0]}</p>
+                </div>
         } else {
             profilePic = <img className="header__profile-icon" src={currentUser === null ? 'Loading' : currentUser.avatar} alt='User Profile Pic' />
         }
     }
 
-    const currentDate = new Date().toLocaleString('en-us', {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'});
+    const currentDate = new Date().toLocaleString('en-us', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     useEffect(() => {
         if (width < 710) {
             toggleMobileMenu(true);
@@ -71,29 +74,32 @@ function Header(props) {
                         <img className='header__button' src={headerLogo} alt='What to Wear?' />
                     </NavLink>
                     <div className='header__info-container'>
-                    <p className="header__date-time">{currentDate}</p>
-                    <p className='header__date-time'>{props.location !== '' ? `${props.location}, ${props.country} ${flag(props.country)}` : ''}</p>
+                        <p className="header__date-time">{currentDate}</p>
+                        <div className='header__container'>
+                            <p className='header__date-time'>{props.location !== '' ? `${props.location}, ${props.country}` : ''}</p>
+                            <span>{flag(props.country)}</span>
+                        </div>
                     </div>
                 </div>
-                {props.loggedIn ? 
-                
-                <div className='header__container'>
-                <ToggleSwitch />
-                <button className="header__button header__add-items-bttn" onClick={props.handleGarmentClick}>+ Add clothes</button>
-                <NavLink exact to="/profile">
-                    <p className="header__button header__username">{currentUser === null ? 'Loading' : currentUser.name}</p>
-                </NavLink>
-                {profilePic}
-            </div>
-                :
-                <div className='header__container'>
-                    <ToggleSwitch className='header__toggleswitch__temp' label='Celcius?' handleCallback={handleWeatherSwitchChange} />
-                    <ToggleSwitch className="header__toggleswitch__theme" label='Dark?'/>
-                    <button className='header__button header__add-items-bttn' onClick={props.handleSignUpClick}>Sign up</button>
-                    <button className='header__button header__add-items-bttn' onClick={props.handleLogInClick}>Log in</button>
-                </div> 
+                {props.loggedIn ?
+
+                    <div className='header__container'>
+                        <ToggleSwitch />
+                        <button className="header__button header__add-items-bttn" onClick={props.handleGarmentClick}>+ Add clothes</button>
+                        <NavLink exact to="/profile">
+                            <p className="header__button header__username">{currentUser === null ? 'Loading' : currentUser.name}</p>
+                        </NavLink>
+                        {profilePic}
+                    </div>
+                    :
+                    <div className='header__container'>
+                        <ToggleSwitch className='header__toggleswitch__temp' label='Celcius?' handleCallback={handleWeatherSwitchChange} />
+                        <ToggleSwitch className="header__toggleswitch__theme" label='Dark?' handleCallback={handleColorThemeChange} />
+                        <button className='header__button header__add-items-bttn' onClick={props.handleSignUpClick}>Sign up</button>
+                        <button className='header__button header__add-items-bttn' onClick={props.handleLogInClick}>Log in</button>
+                    </div>
                 }
-                
+
             </header>
         );
     }

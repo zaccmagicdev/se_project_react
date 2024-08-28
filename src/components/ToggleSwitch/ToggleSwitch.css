@@ -1,12 +1,23 @@
+.toggleswitch{
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .container {
   text-align: center;
 }
+
+.toggle__text{
+  margin: 0;
+}
+
 .toggle-switch {
   position: relative;
   width: 75px;
   display: inline-block;
   text-align: left;
-  top: 8px;
+  top: 3px;
 }
 .checkbox {
   display: none;
@@ -40,7 +51,7 @@
   content: "YES";
   padding-left: 10px;
   background-color: #060;
-  color: #fff;
+  
 }
 .inner:after {
   content: "NO";

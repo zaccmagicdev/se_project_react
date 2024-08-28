@@ -6,8 +6,9 @@ function ToggleSwitch(props){
   console.log(props.handleCallback)
 
   return (
+    <div className='toggleswitch'>
+    <p className='toggle__text'>{props.label + ''}</p>
     <div className="container">
-      {props.label}{" "}
       <div className="toggle-switch">
         <input type="checkbox" className="checkbox"
                name={props.label} id={props.label} onChange={props.handleCallback}/>
@@ -16,6 +17,7 @@ function ToggleSwitch(props){
           <span className="switch" />
         </label>
       </div>
+    </div>
     </div>
   );
 };

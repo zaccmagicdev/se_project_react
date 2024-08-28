@@ -5,4 +5,4 @@ const CurrentThemeContext = React.createContext({
     handleColorThemeChange: () => {}
 })
 
-export default CurrentThemeContext;
+export {CurrentThemeContext};
