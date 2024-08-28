@@ -6,19 +6,30 @@
     font-size: 16px;
 }
 
+.login__modal-label_dark{
+    color: white
+}
+
+.login__modal-label_light{
+    color: black;
+}
+
 .login__modal-input{
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid;
     width: 100%;
     font-family: 'Cabinet Grotesk', Arial, sans-serif;
     font-size: 16px;
+    background: none;
 }
+
+
 
 .login__modal-register-button{
     width: 25%;
     position: relative;
     border: none;
-    background-color: white;
+    background: none;
     display: relative;
     font-family: 'Cabinet Grotesk', Arial, sans-serif;
     color: gray;

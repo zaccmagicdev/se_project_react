@@ -22,7 +22,7 @@ function Header(props) {
     let profilePic;
 
     const { handleWeatherSwitchChange } = React.useContext(CurrentTemperatureUnitContext);
-    const { handleColorThemeChange } = React.useContext(CurrentThemeContext);
+    const { handleColorThemeChange, theme } = React.useContext(CurrentThemeContext);
 
 
     if (currentUser !== null) {
@@ -95,8 +95,8 @@ function Header(props) {
                     <div className='header__container'>
                         <ToggleSwitch className='header__toggleswitch__temp' label='Celcius?' handleCallback={handleWeatherSwitchChange} />
                         <ToggleSwitch className="header__toggleswitch__theme" label='Dark?' handleCallback={handleColorThemeChange} />
-                        <button className='header__button header__add-items-bttn' onClick={props.handleSignUpClick}>Sign up</button>
-                        <button className='header__button header__add-items-bttn' onClick={props.handleLogInClick}>Log in</button>
+                        <button className={`header__button header__button_${theme} header__add-items-bttn`} onClick={props.handleSignUpClick}>Sign up</button>
+                        <button className={`header__button header__button_${theme} header__add-items-bttn`} onClick={props.handleLogInClick}>Log in</button>
                     </div>
                 }
 

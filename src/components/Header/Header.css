@@ -26,6 +26,14 @@
     transition: transform 0.1s ease-in-out;
 }
 
+.header__button_dark{
+    color: white;
+}
+
+.header__button_light{
+    color: black;
+}
+
 .header__button:hover{
     transform: scale(1.2);
 }

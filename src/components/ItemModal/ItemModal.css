@@ -20,6 +20,14 @@
     flex-direction: column;
 }
 
+.itemmodal__container_dark{
+    background-color: rgb(44, 44, 44);
+}
+
+.itemmodal__container_light{
+    background-color: white;
+}
+
 .itemmodal__btn-wrapper{
     position: relative;
 }
@@ -35,8 +43,9 @@
     left: 457px;
     top: 17px;
     cursor: pointer;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.1s ease-in-out;
     filter: invert();
+    mix-blend-mode: difference;
 }
 
 .itemmodal__close-btn:hover{

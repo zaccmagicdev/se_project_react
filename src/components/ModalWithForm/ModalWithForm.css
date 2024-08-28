@@ -9,16 +9,22 @@
 }
 
 .modal__container{
-    background-color: white;
     box-sizing: border-box;
     margin: 195px auto;
     max-width: 496px;
     height: 436px;
     border-radius: 10px;
-    color: black;
     padding: 28px 28px 36px;
     display: flex;
     flex-direction: column;
+}
+
+.modal__container_light{
+    background-color: white;
+}
+
+.modal__container_dark{
+    background-color: rgb(44, 44, 44);
 }
 
 .modal__title{
@@ -36,6 +42,13 @@
     left: 414px;
     bottom: 18px;
     cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+    filter: invert();
+    mix-blend-mode: difference;
+}
+
+.modal__close-btn:hover{
+    transform: rotate(180deg);
 }
 
 .modal__form{
@@ -60,8 +73,18 @@
     cursor: pointer;
 }
 
+.modal__form-submit_dark{
+    color: black;
+    background: white;
+}
+
+.modal__form-submit_light{
+    color: white;
+    background: black;
+}
+
 .modal__form-submit:hover{
-    background: rgba(0, 0, 0, 0.6);
+    opacity: 60%;
 }
 
 @media(max-width: 425px){

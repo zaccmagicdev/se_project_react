@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { CurrentThemeContext } from "../../contexts/CurrentThemeContext";
 import './RegisterModal.css';
 
 function RegisterModal(props) {
+
+    const { theme } = React.useContext(CurrentThemeContext)
+    const color = theme === 'light' ? 'black' : 'white';
 
     const [inputValEmail, setEmail] = useState('');
     const [inputValPassword, setPassword] = useState('');
@@ -32,21 +36,21 @@ function RegisterModal(props) {
 
     return (
         <ModalWithForm title="Sign up" name='registration' buttonName="Next" onClose={props.handleCloseModal} handleSubmit={handleSubmit}>
-            <label className='registration__modal-label'>
+            <label className={`registration__modal-label  registration__modal-label_${theme}`}>
                 Email*
-                <input className="registration__modal-input" placeholder='Email' type="email" onChange={handleEmailChange} required value={inputValEmail}/>
+                <input style={{borderColor: color}} className="registration__modal-input" placeholder='Email' type="email" onChange={handleEmailChange} required value={inputValEmail}/>
             </label>
-            <label className='registration__modal-label'>
+            <label className={`registration__modal-label  registration__modal-label_${theme}`}>
                 Password*
-                <input className="registration__modal-input" placeholder='Password' type="password" onChange={handlePasswordChange} required value={inputValPassword}/>
+                <input style={{borderColor: color}} className="registration__modal-input" placeholder='Password' type="password" onChange={handlePasswordChange} required value={inputValPassword}/>
             </label>
-            <label className='registration__modal-label'>
+            <label className={`registration__modal-label  registration__modal-label_${theme}`}>
                 Name*
-                <input className="registration__modal-input" placeholder='Name' type="text" onChange={handleNameChange} required value={inputValName}/>
+                <input style={{borderColor: color}} className="registration__modal-input" placeholder='Name' type="text" onChange={handleNameChange} required value={inputValName}/>
             </label>
-            <label className='registration__modal-label'>
+            <label className={`registration__modal-label  registration__modal-label_${theme}`}>
                 Avatar URL
-                <input className="registration__modal-input" placeholder='Avatar URL' type="url" onChange={handleAvatarChange} value={inputValAvatar}/>
+                <input style={{borderColor: color}} className="registration__modal-input" placeholder='Avatar URL' type="url" onChange={handleAvatarChange} value={inputValAvatar}/>
             </label>
             <button type="button" className="registration__modal-login-button" onClick={props.handleOpenLogin}>or Log in</button>
         </ModalWithForm>
