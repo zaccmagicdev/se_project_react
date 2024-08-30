@@ -1,9 +1,12 @@
-import { newApiKey } from "./constants"
-import { _processServerResponse } from "./constants"
+import { newApiKey, _processServerResponse, baseUrl } from "./constants"
 
-async function newWeatherAPI(search){
-    const url = `http://api.weatherapi.com/v1/current.json?key=${newApiKey}&q=${search}&aqi=no`;
-    return fetch(url).then(_processServerResponse);
+export async function newWeatherAPI(search){
+    console.log(baseUrl + `current.json?key=${newApiKey}&q=${search}&aqi=no`)
+    return fetch(baseUrl + `current.json?key=${newApiKey}&q=${search}&aqi=no`).then(_processServerResponse);
 }
 
-export default newWeatherAPI;
+export async function getAstronomy(search, dateTime){
+    return fetch(baseUrl + `astronomy.json?key=${newApiKey}&q=${search}&dt=${dateTime}`).then(_processServerResponse);
+}
+
+

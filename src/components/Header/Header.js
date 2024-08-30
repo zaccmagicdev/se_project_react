@@ -37,7 +37,6 @@ function Header(props) {
         }
     }
 
-    const currentDate = new Date().toLocaleString('en-us', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     useEffect(() => {
         if (width < 710) {
             toggleMobileMenu(true);
@@ -74,7 +73,7 @@ function Header(props) {
                         <img className='header__button' src={headerLogo} alt='What to Wear?' />
                     </NavLink>
                     <div className='header__info-container'>
-                        <p className="header__date-time">{currentDate}</p>
+                        <p className="header__date-time">{props.date}</p>
                         <div className='header__container'>
                             <p className='header__date-time'>{props.location !== '' ? `${props.location}, ${props.country}` : ''}</p>
                             <span>{flag(props.country)}</span>

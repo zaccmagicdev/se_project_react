@@ -26,7 +26,7 @@ import { Switch } from "react-router-dom/cjs/react-router-dom";
 import { Route } from 'react-router-dom';
 import * as auth from '../../utils/auth';
 import * as api from '../../utils/api';
-import newWeatherAPI from "../../utils/newweatherapi";
+import { newWeatherAPI, getAstronomy } from "../../utils/newweatherapi";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import SearchBar from "../SearchBar/SearchBar";
 
@@ -51,6 +51,10 @@ function App() {
 
     //history object
     const history = useHistory();
+
+    //date moved to global variable
+    const currentDate = new Date();
+    console.log(currentDate)
 
     //handlers
     const handleOpenGarmentModal = () => {
@@ -165,18 +169,20 @@ function App() {
         }).catch(e => console.error(e))
     }
 
-    function handleColorThemeChange(){
+    function handleColorThemeChange() {
         theme === 'light' ? setTheme('dark') : setTheme('light')
     }
 
     useEffect(() => {
-        if (!(searchResult.length <=1)) {
-        handleSearchMade(true);
-          setCity(searchResult.location.name)
-          setCountry(searchResult.location.country)
-          setTemp(searchResult.current.temp_f)
+        if (!(searchResult.length <= 1)) {
+            handleSearchMade(true);
+            setCity(searchResult.location.name)
+            setCountry(searchResult.location.country)
+            setTemp(searchResult.current.temp_f)
+            getAstronomy(searchResult.location.name, currentDate.toLocaleDateString('en-CA')).then(res => console.log(res))
         }
     }, [searchResult]);
+
 
     //API Calls
     useEffect(() => {
@@ -194,12 +200,12 @@ function App() {
     }, []);
 
     useEffect(() => {
-        if(currentUser !== null){
-        api.getItems()
-            .then((res) => {
-                setServerItems(res.data)
-            })
-            .catch((err) => console.log(err))
+        if (currentUser !== null) {
+            api.getItems()
+                .then((res) => {
+                    setServerItems(res.data)
+                })
+                .catch((err) => console.log(err))
         } else {
             setServerItems(defaultClothingItems)
         }
@@ -208,40 +214,40 @@ function App() {
     return (
         <div className={`App App__${theme}`}>
             <div className="App__Container">
-            <CurrentThemeContext.Provider value={{theme, handleColorThemeChange}}>
-            <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
-                <CurrentTemperatureUnitContext.Provider
-                    value={{ currentTemperatureUnit, handleWeatherSwitchChange }}
-                >
-                    <Header location={city} country={country} handleGarmentClick={handleOpenGarmentModal} handleSignUpClick={handleOpenSignUpModal} handleLogInClick={handleOpenLoginModal} loggedIn={isLoggedIn} />
-                    <Switch>
-                        <Route exact path="/">
-                            <SearchBar onData={handleSearchSubmit} />
-                            {searchMade && <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} onCardLike={handleCardLike} />}
-                        </Route>
-                        <ProtectedRoute path="/profile" loggedIn={isLoggedIn}>
-                            <Profile handleOpenModal={selectCard} handleLogOut={handleLogOut} cards={serverItems} handleOpenFormModal={handleOpenGarmentModal} handleEditProfile={handleOpenEditProfileModal} onCardLike={handleCardLike} />
-                        </ProtectedRoute>
-                    </Switch>
-                    <Footer />
-                    {activeModal === "form" && (
-                        <AddItemModal handleCloseModal={handleCloseModal} submitMethod={handleAddItemSubmit} />
-                    )}
-                    {activeModal === "image" && (
-                        <ItemModal link={selectedCard.link} name={selectedCard.name} temp={selectedCard.weather} onClose={handleCloseModal} onDelete={handleDeleteCard} currentCard={selectedCard} />
-                    )}
-                    {activeModal === "signup" && (
-                        <RegisterModal handleCloseModal={handleCloseModal} submitMethod={handleRegistration} handleOpenLogin={handleOpenLoginModal} />
-                    )}
-                    {activeModal === "login" && (
-                        <LoginModal handleCloseModal={handleCloseModal} submitMethod={handleLogin} handleOpenRegistration={handleOpenSignUpModal} />
-                    )}
-                    {activeModal === "edit" && (
-                        <EditProfileModal handleCloseModal={handleCloseModal} submitMethod={handleProfileEdit} name={currentUser.name} avatar={currentUser.avatar} />
-                    )}
-                </CurrentTemperatureUnitContext.Provider>
-            </CurrentUserContext.Provider>
-            </CurrentThemeContext.Provider >
+                <CurrentThemeContext.Provider value={{ theme, handleColorThemeChange }}>
+                    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
+                        <CurrentTemperatureUnitContext.Provider
+                            value={{ currentTemperatureUnit, handleWeatherSwitchChange }}
+                        >
+                            <Header date={currentDate.toLocaleString('en-us', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} location={city} country={country} handleGarmentClick={handleOpenGarmentModal} handleSignUpClick={handleOpenSignUpModal} handleLogInClick={handleOpenLoginModal} loggedIn={isLoggedIn} />
+                            <Switch>
+                                <Route exact path="/">
+                                    <SearchBar onData={handleSearchSubmit} />
+                                    {searchMade && <Main temp={temp} weather={weather} handleOpenModal={selectCard} sunrise={sunrise} sunset={sunset} cards={serverItems} onCardLike={handleCardLike} />}
+                                </Route>
+                                <ProtectedRoute path="/profile" loggedIn={isLoggedIn}>
+                                    <Profile handleOpenModal={selectCard} handleLogOut={handleLogOut} cards={serverItems} handleOpenFormModal={handleOpenGarmentModal} handleEditProfile={handleOpenEditProfileModal} onCardLike={handleCardLike} />
+                                </ProtectedRoute>
+                            </Switch>
+                            <Footer />
+                            {activeModal === "form" && (
+                                <AddItemModal handleCloseModal={handleCloseModal} submitMethod={handleAddItemSubmit} />
+                            )}
+                            {activeModal === "image" && (
+                                <ItemModal link={selectedCard.link} name={selectedCard.name} temp={selectedCard.weather} onClose={handleCloseModal} onDelete={handleDeleteCard} currentCard={selectedCard} />
+                            )}
+                            {activeModal === "signup" && (
+                                <RegisterModal handleCloseModal={handleCloseModal} submitMethod={handleRegistration} handleOpenLogin={handleOpenLoginModal} />
+                            )}
+                            {activeModal === "login" && (
+                                <LoginModal handleCloseModal={handleCloseModal} submitMethod={handleLogin} handleOpenRegistration={handleOpenSignUpModal} />
+                            )}
+                            {activeModal === "edit" && (
+                                <EditProfileModal handleCloseModal={handleCloseModal} submitMethod={handleProfileEdit} name={currentUser.name} avatar={currentUser.avatar} />
+                            )}
+                        </CurrentTemperatureUnitContext.Provider>
+                    </CurrentUserContext.Provider>
+                </CurrentThemeContext.Provider >
             </div>
         </div>
     );
