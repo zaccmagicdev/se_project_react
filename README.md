@@ -10,8 +10,13 @@ This project is my first attempt at building an app using React.js and working w
 UPDATE RELEASED FOR FRONT END AUTHENTICATION: This app now utilizes logging in and out as well as having an account and item functions run with token functionality. In other words
 a valid token is needed to be logged in and to stay logged in as well as validating functionality with other users cards
 
+## 09/07/2024:
+MAJOR UPDATE BEING WORKED ON: This update is almost done as a matter of fact, all that needs to be completed is the new weather card and formatting things more to the mobile sizes. This update
+enables the user to lookup any city in the world and return information on that rather than just being stuck on one city. Still works fast and creates a more engaging user experience.
+
 ## Technologies Used:
 
+- freeWeatherAPI | Improved API for this site's criterias. Features the ability to customize the API call to lookup any city without coordinates and simply just the name
 - React.js
 - JSX
 - Backend development coming soon!
