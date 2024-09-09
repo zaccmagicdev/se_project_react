@@ -17,9 +17,10 @@ function SearchBar(props) {
     return (
         <form className='searchbar' onSubmit={setData}>
             <label for="seachbar-input">
-                <input required type="text" id="searchbar-input" placeholder='Search for any location...' onChange={handleInputChange} />
+                <input required type="text" className='searchbar__input' id="searchbar-input" placeholder='Search for any location...' onChange={handleInputChange} />
             </label>
             <button className="searchbar__submit" type="submit" />
+            <span className='searchbar__error-text'>{props.error}</span>
         </form>
     )
 }
