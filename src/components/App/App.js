@@ -17,7 +17,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import Profile from "../Profile/Profile";
-import { defaultClothingItems } from "../../utils/constants";
+import { defaultClothingItems, formatTime } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentThemeContext } from "../../contexts/CurrentThemeContext";
@@ -38,8 +38,9 @@ function App() {
   const [region, setRegion] = useState("");
   const [country, setCountry] = useState("");
   const [weather, setWeather] = useState("");
-  const [sunrise, setSunrise] = useState(0);
-  const [sunset, setSunset] = useState(0);
+  const [sunriseHr, setSunriseHr] = useState(0);
+  const [sunsetHr, setSunsetHr] = useState(0);
+  const [localTimeHr, setLocalTimeHr] = useState(0)
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [serverItems, setServerItems] = useState(null);
   const [isLoggedIn, setLogIn] = useState(false);
@@ -151,6 +152,7 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+
   function handleLogOut() {
     localStorage.removeItem("jwt");
     setCurrentUser(null);
@@ -193,7 +195,7 @@ function App() {
   function handleColorThemeChange() {
     theme === "light" ? setTheme("dark") : setTheme("light");
   }
-
+// 10,13
   useEffect(() => {
     if (!(searchResult.length <= 1)) {
       handleSearchMade(true);
@@ -201,16 +203,28 @@ function App() {
       setCountry(searchResult.location.country);
       setRegion(searchResult.location.region);
       setTemp(searchResult.current.temp_f);
+      console.log(searchResult.location.localtime.substring(10,13))
+      setLocalTimeHr(formatTime(searchResult.location.localtime.substring(10,13)))
+      setWeather(searchResult.current.condition.text)
       getAstronomy(
         searchResult.location.name,
         currentDate.toLocaleDateString("en-CA")
+        
       )
-        .then((res) => console.log(res))
+        .then((res) => {
+          console.log(res)
+          setSunriseHr((formatTime(res.astronomy.astro.sunrise.substring(0,2))))
+          setSunsetHr((formatTime(res.astronomy.astro.sunset.substring(0,2))))
+
+        })
         .catch((err) => {
         console.log(err)
         });
     }
   }, [searchResult]);
+
+ 
+
 
   //API Calls
   useEffect(() => {
@@ -241,6 +255,7 @@ function App() {
       setServerItems(defaultClothingItems);
     }
   }, []);
+
 
   return (
     <div className={`App App__${theme}`}>
@@ -273,8 +288,9 @@ function App() {
                       temp={temp}
                       weather={weather}
                       handleOpenModal={selectCard}
-                      sunrise={sunrise}
-                      sunset={sunset}
+                      sunrise={sunriseHr}
+                      sunset={(sunsetHr + 12)}
+                      localTime={localTimeHr}
                       cards={serverItems}
                       onCardLike={handleCardLike}
                     />

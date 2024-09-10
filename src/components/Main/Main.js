@@ -6,12 +6,12 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 
 
 function Main(props) {
-
     let filteredCards = [];
     const { currentTemperatureUnit } = React.useContext(CurrentTemperatureUnitContext);
 
-    const timeOfDay = (Date.now() / 1000) >= props.sunrise && (Date.now() / 1000) <= props.sunset
-        ? "day" : "night";
+    const timeOfDay = /*(Date.now() / 1000) >= props.sunrise && (Date.now() / 1000) <= props.sunset
+        ? "day" : "night";*/
+        props.localTime >= props.sunrise && props.localTime <= props.sunset ? "day" : "night";
 
     const unitTempInfo = currentTemperatureUnit === 'F' ? `${Math.round(props.temp)}°F` : `${Math.round((props.temp - 32) * 5 / 9)}°C`;
 
