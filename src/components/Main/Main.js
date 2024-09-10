@@ -13,6 +13,8 @@ function Main(props) {
         ? "day" : "night";*/
         props.localTime >= props.sunrise && props.localTime <= props.sunset ? "day" : "night";
 
+    console.log(timeOfDay)
+
     const unitTempInfo = currentTemperatureUnit === 'F' ? `${Math.round(props.temp)}°F` : `${Math.round((props.temp - 32) * 5 / 9)}°C`;
 
     function getWeatherType(temperature) {
@@ -34,6 +36,8 @@ function Main(props) {
             }
         });
     }
+
+    console.log(props.weather)
 
     return (
         <main className="main__container">

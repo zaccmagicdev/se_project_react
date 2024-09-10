@@ -2,6 +2,12 @@ const backgrounds = [
   {
     url: require("../images/Ellipse 14.svg").default,
     timeOfDay: "day",
+    weather: "Sunny",
+    color: "rgba(0, 163, 255, 1)",
+  },
+  {
+    url: require("../images/Ellipse 14.svg").default,
+    timeOfDay: "day",
     weather: "Clear",
     color: "rgba(0, 163, 255, 1)",
   },
@@ -10,6 +16,18 @@ const backgrounds = [
     timeOfDay: "day",
     weather: "Partly cloudy",
     color: "rgba(0, 163, 255, 1)",
+  },
+  {
+    url: require("../images/Group 148.svg").default,
+    timeOfDay: "day",
+    weather: "Cloudy",
+    color: "rgba(108, 166, 199, 1)",
+  },
+  {
+    url: require("../images/Group 148.svg").default,
+    timeOfDay: "day",
+    weather: "Overcast",
+    color: "rgba(108, 166, 199, 1)",
   },
   {
     url: require("../images/Group 148.svg").default,
@@ -42,9 +60,27 @@ const backgrounds = [
     color: "rgba(108, 166, 199, 1)",
   },
   {
+    url: require("../images/Group 146(1).svg").default,
+    timeOfDay: "day",
+    weather: "Patchy rain possible",
+    color: "rgba(108, 166, 199, 1)",
+  },
+  {
     url: require("../images/Group 147.svg").default,
     timeOfDay: "day",
     weather: "Snow",
+    color: "rgba(108, 166, 199, 1)",
+  },
+  {
+    url: require("../images/Group 147.svg").default,
+    timeOfDay: "day",
+    weather: "Patchy snow possible",
+    color: "rgba(108, 166, 199, 1)",
+  },
+  {
+    url: require("../images/Group 147.svg").default,
+    timeOfDay: "day",
+    weather: "Patchy snow possible",
     color: "rgba(108, 166, 199, 1)",
   },
   {
@@ -52,6 +88,14 @@ const backgrounds = [
     timeOfDay: "day",
     weather: "Thunderstorm",
     color: "rgba(108, 166, 199, 1)",
+  },
+
+
+  {
+    url: require("../images/Ellipse 15.svg").default,
+    timeOfDay: "night",
+    weather: "Sunny",
+    color: "rgba(40, 104, 151, 1)",
   },
   {
     url: require("../images/Ellipse 15.svg").default,
@@ -62,7 +106,19 @@ const backgrounds = [
   {
     url: require("../images/Uniontestnight.svg").default,
     timeOfDay: "night",
-    weather: "Clouds",
+    weather: "Cloudy",
+    color: "rgba(40, 104, 151, 1)",
+  },
+  {
+    url: require("../images/Uniontestnight.svg").default,
+    timeOfDay: "night",
+    weather: "Overcast",
+    color: "rgba(40, 104, 151, 1)",
+  },
+  {
+    url: require("../images/Uniontestnight.svg").default,
+    timeOfDay: "night",
+    weather: "Partly cloudy",
     color: "rgba(40, 104, 151, 1)",
   },
   {

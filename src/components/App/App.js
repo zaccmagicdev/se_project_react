@@ -40,7 +40,7 @@ function App() {
   const [weather, setWeather] = useState("");
   const [sunriseHr, setSunriseHr] = useState(0);
   const [sunsetHr, setSunsetHr] = useState(0);
-  const [localTimeHr, setLocalTimeHr] = useState(0)
+  const [localTimeHr, setLocalTimeHr] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [serverItems, setServerItems] = useState(null);
   const [isLoggedIn, setLogIn] = useState(false);
@@ -152,7 +152,6 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-
   function handleLogOut() {
     localStorage.removeItem("jwt");
     setCurrentUser(null);
@@ -192,10 +191,30 @@ function App() {
       .catch((e) => console.error(e));
   }
 
+  //functions for temporaily shortening weather responses for my current weathercard system
+  function shortenWeather(response) {
+    if (
+      response.includes("snow") ||
+      response.includes("sleet") ||
+      response.includes("pellets") ||
+      response.includes("freezing")
+    ) {
+      return "Snow";
+    } else if (
+      response.includes("rain") ||
+      response.includes("shower") ||
+      response.includes("drizzle")
+    ) {
+      return "Rain";
+    } else {
+      return response;
+    }
+  }
+
   function handleColorThemeChange() {
     theme === "light" ? setTheme("dark") : setTheme("light");
   }
-// 10,13
+  // 10,13
   useEffect(() => {
     if (!(searchResult.length <= 1)) {
       handleSearchMade(true);
@@ -203,28 +222,24 @@ function App() {
       setCountry(searchResult.location.country);
       setRegion(searchResult.location.region);
       setTemp(searchResult.current.temp_f);
-      console.log(searchResult.location.localtime.substring(10,13))
-      setLocalTimeHr(formatTime(searchResult.location.localtime.substring(10,13)))
-      setWeather(searchResult.current.condition.text)
+      setLocalTimeHr(
+        formatTime(searchResult.location.localtime.substring(10, 13))
+      );
+      setWeather(shortenWeather(searchResult.current.condition.text));
       getAstronomy(
         searchResult.location.name,
         currentDate.toLocaleDateString("en-CA")
-        
       )
         .then((res) => {
-          console.log(res)
-          setSunriseHr((formatTime(res.astronomy.astro.sunrise.substring(0,2))))
-          setSunsetHr((formatTime(res.astronomy.astro.sunset.substring(0,2))))
-
+          console.log(res);
+          setSunriseHr(formatTime(res.astronomy.astro.sunrise.substring(0, 2)));
+          setSunsetHr(formatTime(res.astronomy.astro.sunset.substring(0, 2)));
         })
         .catch((err) => {
-        console.log(err)
+          console.log(err);
         });
     }
   }, [searchResult]);
-
- 
-
 
   //API Calls
   useEffect(() => {
@@ -255,7 +270,6 @@ function App() {
       setServerItems(defaultClothingItems);
     }
   }, []);
-
 
   return (
     <div className={`App App__${theme}`}>
@@ -289,7 +303,7 @@ function App() {
                       weather={weather}
                       handleOpenModal={selectCard}
                       sunrise={sunriseHr}
-                      sunset={(sunsetHr + 12)}
+                      sunset={sunsetHr + 12}
                       localTime={localTimeHr}
                       cards={serverItems}
                       onCardLike={handleCardLike}
