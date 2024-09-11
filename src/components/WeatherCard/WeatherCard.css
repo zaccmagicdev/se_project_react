@@ -17,6 +17,23 @@
     margin-left: 16px;
 }
 
+.weathercard__container{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.weathercard__information{
+    display: flex;
+    flex-direction: column;
+}
+
+.weathercard__stat{
+    color: white;
+    margin: 0;
+    font-size: 14px;
+}
+
 .weathercard__wrapper{
     position: absolute;
 }

@@ -17,7 +17,7 @@ import AddItemModal from "../AddItemModal/AddItemModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import Profile from "../Profile/Profile";
-import { defaultClothingItems, formatTime } from "../../utils/constants";
+import { defaultClothingItems } from "../../utils/constants";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentThemeContext } from "../../contexts/CurrentThemeContext";
@@ -25,7 +25,7 @@ import { Switch } from "react-router-dom/cjs/react-router-dom";
 import { Route } from "react-router-dom";
 import * as auth from "../../utils/auth";
 import * as api from "../../utils/api";
-import { newWeatherAPI, getAstronomy } from "../../utils/newweatherapi";
+import { newWeatherAPI} from "../../utils/newweatherapi";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import SearchBar from "../SearchBar/SearchBar";
 
@@ -38,9 +38,7 @@ function App() {
   const [region, setRegion] = useState("");
   const [country, setCountry] = useState("");
   const [weather, setWeather] = useState("");
-  const [sunriseHr, setSunriseHr] = useState(0);
-  const [sunsetHr, setSunsetHr] = useState(0);
-  const [localTimeHr, setLocalTimeHr] = useState(0);
+  const [DayTimeValue, setDayTimeValue] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [serverItems, setServerItems] = useState(null);
   const [isLoggedIn, setLogIn] = useState(false);
@@ -221,23 +219,9 @@ function App() {
       setCity(searchResult.location.name);
       setCountry(searchResult.location.country);
       setRegion(searchResult.location.region);
+      setDayTimeValue(searchResult.current.is_day)
       setTemp(searchResult.current.temp_f);
-      setLocalTimeHr(
-        formatTime(searchResult.location.localtime.substring(10, 13))
-      );
       setWeather(shortenWeather(searchResult.current.condition.text));
-      getAstronomy(
-        searchResult.location.name,
-        currentDate.toLocaleDateString("en-CA")
-      )
-        .then((res) => {
-          console.log(res);
-          setSunriseHr(formatTime(res.astronomy.astro.sunrise.substring(0, 2)));
-          setSunsetHr(formatTime(res.astronomy.astro.sunset.substring(0, 2)));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
     }
   }, [searchResult]);
 
@@ -300,11 +284,8 @@ function App() {
                   {searchMade && (
                     <Main
                       temp={temp}
+                      dayTimeValue={DayTimeValue}
                       weather={weather}
-                      handleOpenModal={selectCard}
-                      sunrise={sunriseHr}
-                      sunset={sunsetHr + 12}
-                      localTime={localTimeHr}
                       cards={serverItems}
                       onCardLike={handleCardLike}
                     />

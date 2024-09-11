@@ -9,12 +9,7 @@ function Main(props) {
     let filteredCards = [];
     const { currentTemperatureUnit } = React.useContext(CurrentTemperatureUnitContext);
 
-    const timeOfDay = /*(Date.now() / 1000) >= props.sunrise && (Date.now() / 1000) <= props.sunset
-        ? "day" : "night";*/
-        props.localTime >= props.sunrise && props.localTime <= props.sunset ? "day" : "night";
-
-    console.log(timeOfDay)
-
+    const timeOfDay = props.dayTimeValue === 0 ? 'night' : 'day';
     const unitTempInfo = currentTemperatureUnit === 'F' ? `${Math.round(props.temp)}°F` : `${Math.round((props.temp - 32) * 5 / 9)}°C`;
 
     function getWeatherType(temperature) {

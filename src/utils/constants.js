@@ -72,18 +72,6 @@ const backgrounds = [
     color: "rgba(108, 166, 199, 1)",
   },
   {
-    url: require("../images/Group 147.svg").default,
-    timeOfDay: "day",
-    weather: "Patchy snow possible",
-    color: "rgba(108, 166, 199, 1)",
-  },
-  {
-    url: require("../images/Group 147.svg").default,
-    timeOfDay: "day",
-    weather: "Patchy snow possible",
-    color: "rgba(108, 166, 199, 1)",
-  },
-  {
     url: require("../images/Group 145.svg").default,
     timeOfDay: "day",
     weather: "Thunderstorm",
@@ -204,13 +192,6 @@ const defaultClothingItems = [
   },
 ];
 
-//function for formatting time without 0 at the front
-function formatTime(timeAsString) {
-  const timeAsArray = timeAsString.split('');
-  timeAsArray[0] = '';
-  return parseInt(timeAsArray.join(''));
-}
-
 //we can rewrite the weather card as containers with the appropriate vector groups on the right and picking the color depending on the weather/time of day
 
 const apiKey = "bb1a34b30e91f6493febc3872715ffc5";
@@ -231,6 +212,5 @@ export {
   backgrounds,
   _processServerResponse,
   defaultClothingItems,
-  baseUrl,
-  formatTime,
+  baseUrl
 };
