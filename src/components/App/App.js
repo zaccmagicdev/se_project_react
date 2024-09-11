@@ -50,6 +50,7 @@ function App() {
   const [searchResult, setSearchResult] = useState([{}]);
   const [searchMade, handleSearchMade] = useState(false);
   const [theme, setTheme] = useState("light");
+  const [err, setErr] = useState('');
 
   //history object
   const history = useHistory();
@@ -188,9 +189,13 @@ function App() {
     newWeatherAPI(data)
       .then((res) => {
         setSearchResult(res);
-        console.log(res);
       })
-      .catch((e) => console.error(e));
+      .then(() => {
+        err !== '' && (setErr(''))
+      })
+      .catch((e) =>{
+        e === 'Error: 400' && (setErr('Please enter a valid location'))
+      });
   }
 
   //functions for temporaily shortening weather responses for my current weathercard system
@@ -288,7 +293,7 @@ function App() {
               />
               <Switch>
                 <Route exact path="/">
-                  <SearchBar onData={handleSearchSubmit} />
+                  <SearchBar errMessage={err} onData={handleSearchSubmit} />
                   {searchMade && (
                     <Main
                       temp={temp}
