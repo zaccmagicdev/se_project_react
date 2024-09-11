@@ -39,6 +39,10 @@ function App() {
   const [country, setCountry] = useState("");
   const [weather, setWeather] = useState("");
   const [DayTimeValue, setDayTimeValue] = useState(0);
+  const [uv, setUv] = useState('');
+  const [humidity, setHumidity] = useState('');
+  const [wind_dir, setWind_dir] = useState('');
+  const [wind_mph, setWind_mph] = useState('');
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [serverItems, setServerItems] = useState(null);
   const [isLoggedIn, setLogIn] = useState(false);
@@ -222,6 +226,10 @@ function App() {
       setDayTimeValue(searchResult.current.is_day)
       setTemp(searchResult.current.temp_f);
       setWeather(shortenWeather(searchResult.current.condition.text));
+      setUv(searchResult.current.uv)
+      setHumidity(searchResult.current.humidity)
+      setWind_dir(searchResult.current.wind_dir)
+      setWind_mph(searchResult.current.wind_mph)
     }
   }, [searchResult]);
 
@@ -288,7 +296,11 @@ function App() {
                       weather={weather}
                       cards={serverItems}
                       onCardLike={handleCardLike}
-                    />
+                      uvIndex={uv}
+                      humidity={humidity}
+                      windDir={wind_dir}
+                      windMph={wind_mph}
+                      />
                   )}
                 </Route>
                 <ProtectedRoute path="/profile" loggedIn={isLoggedIn}>

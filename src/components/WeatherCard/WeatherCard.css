@@ -26,12 +26,14 @@
 .weathercard__information{
     display: flex;
     flex-direction: column;
+    gap: 2px;
 }
 
 .weathercard__stat{
     color: white;
     margin: 0;
-    font-size: 14px;
+    font-size: 13px;
+    opacity: 60%;
 }
 
 .weathercard__wrapper{

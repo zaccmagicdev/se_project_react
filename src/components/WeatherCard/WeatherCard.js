@@ -17,10 +17,10 @@ function WeatherCard(props) {
         <div className="weathercard__container">
           <div className="weathercard__temp">{props.temp}</div>
           <div className="weathercard__information">
-            <span className="weathercard__stat">UV:</span>
-            <span className="weathercard__stat">HUMIDITY:</span>
-            <span className="weathercard__stat">WIND DIR:</span>
-            <span className="weathercard__stat">WIND MPH:</span>
+            <span className="weathercard__stat">{`UV Index: ${props.uvIndex}`}</span>
+            <span className="weathercard__stat">{`Humidity: ${props.humidity}%`}</span>
+            <span className="weathercard__stat">{`Wind Direction: ${props.windDir}`}</span>
+            <span className="weathercard__stat">{`Wind Speed: ${props.windMph}mph`}</span>
           </div>
         </div>
         {
