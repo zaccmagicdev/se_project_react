@@ -10,16 +10,21 @@ function SearchBar(props) {
 
   React.useEffect(() => {
     if (props.errMessage !== "") {
-      console.log("hi");
-      inputRef.current.classList.add("searchbar__input_bad-search");
-      errTextRef.current.classList.add("searchbar__error-text_active");
-      componentRef.current.classList.add("searchbar_error");
+     inputRef.current.classList.add("searchbar__input_bad-search");
+     errTextRef.current.classList.add("searchbar__error-text_active");
     } else {
       inputRef.current.classList.remove("searchbar__input_bad-search");
       errTextRef.current.classList.remove("searchbar__error-text_active");
-      componentRef.current.classList.remove("searchbar_error");
+      //componentRef.current.classList.remove("searchbar_error");
     }
   }, [props.errMessage]);
+
+function handleShake(){
+    if (props.errMessage !== "") {
+        setTimeout(() => componentRef.current.classList.add("searchbar_error"), 0);
+        setTimeout(() => componentRef.current.classList.remove("searchbar_error"), 100);
+    }
+}
 
   function handleInputChange(e) {
     setInput(e.target.value);
@@ -31,23 +36,30 @@ function SearchBar(props) {
   }
 
   return (
-    <form ref={componentRef} className="searchbar" onSubmit={setData}>
-      <label for="seachbar-input">
-        <input
-          ref={inputRef}
-          required
-          type="text"
-          className="searchbar__input"
-          id="searchbar-input"
-          placeholder="Search for any location..."
-          onChange={handleInputChange}
-        />
-      </label>
-      <button className="searchbar__submit" type="submit" />
-      <span ref={errTextRef} className="searchbar__error-text">
+    <div className="searchbar__container">
+    <form ref={componentRef} className="searchbar" onSubmit={(e) => {
+        setData(e);
+        handleShake();
+        }}>
+      
+        <label for="seachbar-input">
+          <input
+            ref={inputRef}
+            required
+            type="text"
+            className="searchbar__input"
+            id="searchbar-input"
+            placeholder="Search for any location..."
+            onChange={handleInputChange}
+          />
+        </label>
+        <button className="searchbar__submit" type="submit"/>
+      
+    </form>
+    <span ref={errTextRef} className="searchbar__error-text">
         {props.errMessage}
       </span>
-    </form>
+    </div>
   );
 }
 
