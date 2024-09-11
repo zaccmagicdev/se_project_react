@@ -8,6 +8,8 @@ function SearchBar(props) {
   const errTextRef = React.useRef();
   const componentRef = React.useRef();
 
+  const shakeCallback = React.useCallback(() => handleShake(), [props.errMessage]);
+
   React.useEffect(() => {
     if (props.errMessage !== "") {
      inputRef.current.classList.add("searchbar__input_bad-search");
@@ -39,7 +41,7 @@ function handleShake(){
     <div className="searchbar__container">
     <form ref={componentRef} className="searchbar" onSubmit={(e) => {
         setData(e);
-        handleShake();
+        shakeCallback();
         }}>
       
         <label for="seachbar-input">
