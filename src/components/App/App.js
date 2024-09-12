@@ -189,6 +189,7 @@ function App() {
     newWeatherAPI(data)
       .then((res) => {
         setSearchResult(res);
+        console.log(res)
       })
       .then(() => {
         err !== '' && (setErr(''))
@@ -296,6 +297,7 @@ function App() {
                   <SearchBar errMessage={err} onData={handleSearchSubmit} />
                   {searchMade && (
                     <Main
+                      handleOpenModal={selectCard}
                       temp={temp}
                       dayTimeValue={DayTimeValue}
                       weather={weather}
