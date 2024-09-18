@@ -88,7 +88,7 @@
 
 .header__mobile-menu {
   width: 95%;
-  height: 151px;
+  height: 181px;
   left: 0;
   right: 0;
   position: absolute;
@@ -110,6 +110,11 @@
   background: transparent url(../../images/close-icon.svg) center no-repeat;
   cursor: pointer;
   margin-left: auto;
+}
+
+.header__mobile-menu-close-btn:hover{
+  transform: rotate(180deg);
+  
 }
 
 .header__mobile-container {

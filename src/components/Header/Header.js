@@ -79,18 +79,28 @@ function Header(props) {
               }}
             ></button>
             <div className="header__mobile-container">
-              <p className="header__username">Brock Purdy</p>
-              <img
-                className="header__profile-icon"
-                src={profileImage}
-                alt="User Profile Pic"
-              />
+            <NavLink exact to="/profile">
+              <p className="header__button header__username">
+                {currentUser === null ? "Loading..." : currentUser.name}
+              </p>
+            </NavLink>
+            {profilePic}
               <button
-                className="header__add-items-bttn"
+                className="header__button header__add-items-bttn"
                 onClick={handleCloseMobileModal}
               >
                 + Add clothes
               </button>
+              <ToggleSwitch
+              className="header__toggleswitch__temp"
+              label="Celcius?"
+              handleCallback={handleWeatherSwitchChange}
+            />
+            <ToggleSwitch
+              className="header__toggleswitch__theme"
+              label="Dark?"
+              handleCallback={handleColorThemeChange}
+            />
             </div>
           </div>
         )}
