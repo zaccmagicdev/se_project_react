@@ -123,3 +123,9 @@
   flex-wrap: wrap;
   gap: 12px;
 }
+
+@media(max-width: 710px){
+  .header{
+    margin-bottom: 10px;
+  }
+}

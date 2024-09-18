@@ -57,9 +57,15 @@ function Header(props) {
   if (isMobileMenuOpened) {
     return (
       <header className="header">
-        <img src={headerLogo} alt="What to Wear?" />
+         <NavLink exact to="/">
+            <img
+              className="header__button"
+              src={headerLogo}
+              alt="What to Wear?"
+            />
+          </NavLink>
         <button
-          className="header__mobile-button"
+          className="header__button header__mobile-button"
           onClick={() => {
             toggleModalMenu(true);
           }}
