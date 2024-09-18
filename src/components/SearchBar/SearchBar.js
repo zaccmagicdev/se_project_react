@@ -10,6 +10,8 @@ function SearchBar(props) {
 
   const shakeCallback = React.useCallback(() => handleShake(), [props.errMessage ]);
 
+  
+
   React.useEffect(() => {
     if (props.errMessage !== "") {
      inputRef.current.classList.add("searchbar__input_bad-search");
@@ -19,7 +21,7 @@ function SearchBar(props) {
     } else {
       inputRef.current.classList.remove("searchbar__input_bad-search");
       errTextRef.current.classList.remove("searchbar__error-text_active");
-      //componentRef.current.classList.remove("searchbar_error");
+      componentRef.current.classList.remove("searchbar_error");
     }
   }, [props.errMessage]);
 
@@ -27,6 +29,8 @@ function handleShake(){
     if (props.errMessage !== "") {
         setTimeout(() => componentRef.current.classList.add("searchbar_error"), 0);
         setTimeout(() => componentRef.current.classList.remove("searchbar_error"), 100);
+    } else {
+        componentRef.current.classList.remove("searchbar_error")
     }
 }
 
@@ -34,7 +38,7 @@ function handleShake(){
     setInput(e.target.value);
   }
 
-  function setData(e) {
+  function setData(e){
     e.preventDefault();
     props.onData(input);
   }
@@ -43,7 +47,7 @@ function handleShake(){
     <div className="searchbar__container">
     <form ref={componentRef} className="searchbar" onSubmit={(e) => {
         setData(e);
-        shakeCallback();
+       shakeCallback();
         }}>
       
         <label for="seachbar-input">
