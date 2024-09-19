@@ -47,6 +47,7 @@
   font-weight: bold;
   box-sizing: border-box;
 }
+
 .inner:before {
   content: "YES";
   padding-left: 10px;
