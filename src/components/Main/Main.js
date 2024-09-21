@@ -43,6 +43,7 @@ function Main(props) {
       <WeatherCard
         temp={unitTempInfo}
         time={timeOfDay}
+        timeMs={props.timeMs}
         weather={props.weather}
         uvIndex={props.uvIndex}
         humidity={props.humidity}

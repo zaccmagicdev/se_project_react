@@ -94,16 +94,6 @@ function Header(props) {
               >
                 + Add clothes
               </button>
-              <ToggleSwitch
-              className="header__toggleswitch__temp"
-              label="Celcius?"
-              handleCallback={handleWeatherSwitchChange}
-            />
-            <ToggleSwitch
-              className="header__toggleswitch__theme"
-              label="Dark?"
-              handleCallback={handleColorThemeChange}
-            />
             </div>
           </div>
         )}

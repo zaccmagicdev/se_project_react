@@ -14,13 +14,28 @@
     color: white;
     font-size: 36px;
     font-weight: 700;
-    margin-left: 16px;
+    margin: 0 0 0 16px;
+}
+
+
+.weathercard__time{
+    color: white;
+    margin: 0;
+    margin: 0 0 0 16px;
 }
 
 .weathercard__container{
     display: flex;
     align-items: center;
     gap: 8px;
+    height: 100%;
+}
+
+.weathercard__container__leftmost{
+    flex-direction: column;
+    height: 100%;
+    gap: 0px;
+    justify-content: center;
 }
 
 .weathercard__information{

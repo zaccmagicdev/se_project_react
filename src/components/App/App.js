@@ -39,6 +39,7 @@ function App() {
   const [country, setCountry] = useState("");
   const [weather, setWeather] = useState("");
   const [DayTimeValue, setDayTimeValue] = useState(0);
+  const [time, setTime] = useState('');
   const [uv, setUv] = useState('');
   const [humidity, setHumidity] = useState('');
   const [wind_dir, setWind_dir] = useState('');
@@ -229,6 +230,7 @@ function App() {
       setCity(searchResult.location.name);
       setCountry(searchResult.location.country);
       setRegion(searchResult.location.region);
+      setTime(searchResult.location.localtime)
       setDayTimeValue(searchResult.current.is_day)
       setTemp(searchResult.current.temp_f);
       setWeather(shortenWeather(searchResult.current.condition.text));
@@ -307,6 +309,7 @@ function App() {
                       humidity={humidity}
                       windDir={wind_dir}
                       windMph={wind_mph}
+                      timeMs={time}
                       />
                   )}
                 </Route>
