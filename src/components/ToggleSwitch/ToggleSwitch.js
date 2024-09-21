@@ -1,34 +1,43 @@
-import * as React from 'react';
-import './ToggleSwitch.css'
-import { set } from 'mongoose';
+import * as React from "react";
+import "./ToggleSwitch.css";
 
-function ToggleSwitch(props){
+function ToggleSwitch(props) {
+  const [toggled, setIsToggled] = React.useState(false);
 
-  const [isToggled, setToggled] = React.useState(false);
-  const togSwitch = React.useRef();
-
- 
-
-  React.useEffect(() => {
-    isToggled ? togSwitch.checked = true : togSwitch.checked = false
+  function toggle() {
     props.handleCallback();
-  }, [isToggled])
+    setIsToggled(!toggled);
+  }
 
   return (
-    <div className='toggleswitch'>
-    <p className='toggle__text'>{props.label + ''}</p>
-    <div className="container">
-      <div className="toggle-switch">
-        <input type="checkbox" className="checkbox"
-               name={props.label} id={props.label} onChange={setToggled(true)} useRef={props.label} />
-        <label className="label" htmlFor={props.label}>
-          <span className="inner" />
-          <span className="switch" />
-        </label>
+    <div
+      onClick={toggle}
+      className={`wrg-toggle ${toggled ? "wrg-toggle--checked" : ""}`}
+    >
+      <div className="wrg-toggle-container">
+        <div className="wrg-toggle-uncheck">
+        <img
+            className="wrg-toggle__icon"
+            src={props.icon1Link}
+            alt="unchecked icon"
+          />
+        </div>
+        <div className="wrg-toggle-check">
+          <img
+            className="wrg-toggle__icon"
+            src={props.icon2Link}
+            alt="checked icon"
+          />
+        </div>
       </div>
-    </div>
+      <div className="wrg-toggle-circle"></div>
+      <input
+        className="wrg-toggle-input"
+        type="checkbox"
+        aria-label="Toggle Button"
+      />
     </div>
   );
-};
+}
 
 export default ToggleSwitch;

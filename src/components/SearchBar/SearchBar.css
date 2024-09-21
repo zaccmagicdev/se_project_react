@@ -1,3 +1,5 @@
+
+
 .searchbar__container{
     display: flex;
     flex-direction: column;
@@ -19,6 +21,7 @@
 
 .searchbar__input{
     height: 100%;
+    width: 100%;
     box-sizing: border-box;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;

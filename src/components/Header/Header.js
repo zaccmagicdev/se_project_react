@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import headerLogo from "../../images/HeaderLogo.svg";
-import profileImage from "../../images/profile-img.jpg";
+import sunIcon from "../../images/sun-regular.svg"
+import moonIcon from "../../images/moon-regular.svg"
+import fIcon from "../../images/f-solid.svg"
+import cIcon from "../../images/c-solid.svg"
 import "./Header.css";
 import { NavLink } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -151,11 +154,15 @@ function Header(props) {
               className="header__toggleswitch__temp"
               label="Celcius?"
               handleCallback={handleWeatherSwitchChange}
+              icon1Link={cIcon}
+              icon2Link={fIcon}
             />
             <ToggleSwitch
               className="header__toggleswitch__theme"
               label="Dark?"
               handleCallback={handleColorThemeChange}
+              icon1Link={moonIcon}
+              icon2Link={sunIcon}
             />
             <button
               className={`header__button header__button_${theme} header__add-items-bttn`}
