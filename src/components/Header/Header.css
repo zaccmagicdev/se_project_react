@@ -83,8 +83,17 @@
   border: none;
   border-radius: 10px;
   background: url(../../images/Group\ 158.svg) no-repeat center;
+  ;
   cursor: pointer;
   margin: 0;
+}
+
+.header__mobile-button_dark{
+  background-color: rgba(169, 169, 169, 0.233);
+}
+
+.header__mobile-button_light{
+  background-color: #f3f3f3;
 }
 
 .header__mobile-menu {
@@ -100,6 +109,7 @@
   border-radius: 10px;
   padding: 11px;
   box-sizing: border-box;
+  top: 9px;
 }
 
 .header__mobile-menu-close-btn {
@@ -111,6 +121,7 @@
   background: transparent url(../../images/close-icon.svg) center no-repeat;
   cursor: pointer;
   margin-left: auto;
+  transition: transform 0.1s ease-in-out;
 }
 
 .header__mobile-menu-close-btn:hover{

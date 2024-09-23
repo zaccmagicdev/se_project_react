@@ -82,7 +82,7 @@ function Header(props) {
               icon2Link={sunIcon}
             />
         <button
-          className="header__button header__mobile-button"
+          className={`header__button header__mobile-button header__mobile-button_${theme}`}
           onClick={() => {
             toggleModalMenu(true);
           }}
