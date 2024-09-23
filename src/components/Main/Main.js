@@ -36,8 +36,6 @@ function Main(props) {
     });
   }
 
-  console.log(props.weather);
-
   return (
     <main className="main__container">
       <WeatherCard

@@ -67,6 +67,20 @@ function Header(props) {
               alt="What to Wear?"
             />
           </NavLink>
+          <ToggleSwitch
+              className="header__toggleswitch__temp"
+              label="Celcius?"
+              handleCallback={handleWeatherSwitchChange}
+              icon1Link={cIcon}
+              icon2Link={fIcon}
+            />
+            <ToggleSwitch
+              className="header__toggleswitch__theme"
+              label="Dark?"
+              handleCallback={handleColorThemeChange}
+              icon1Link={moonIcon}
+              icon2Link={sunIcon}
+            />
         <button
           className="header__button header__mobile-button"
           onClick={() => {

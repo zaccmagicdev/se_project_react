@@ -58,8 +58,7 @@ function App() {
 
   //date moved to global variable
   const currentDate = new Date();
-  console.log(currentDate);
-
+  
   //handlers
   const handleOpenGarmentModal = () => {
     setActiveModal("form");
