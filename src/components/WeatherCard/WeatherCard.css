@@ -1,69 +1,88 @@
-.weathercard{
-    /*this will eventually be rewritten to properly resize for responsive implimentation*/
-    background-size: cover;
-    height: 80px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 10px;
-    overflow: hidden;
+.weathercard {
+  /*this will eventually be rewritten to properly resize for responsive implimentation*/
+  background-size: cover;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
-.weathercard__temp{
-    color: white;
-    font-size: 36px;
-    font-weight: 700;
-    margin: 0 0 0 16px;
+.weathercard__temp {
+  color: white;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 0 0 0 16px;
+}
+
+.weathercard__time {
+  color: white;
+  margin: 0;
+  margin: 0 0 0 16px;
+}
+
+.weathercard__container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+}
+
+.weathercard__container__leftmost {
+  flex-direction: column;
+  height: 100%;
+  gap: 0px;
+  justify-content: center;
+}
+
+.weathercard__information {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.weathercard__stat {
+  color: white;
+  margin: 0;
+  font-size: 13px;
+  opacity: 60%;
 }
 
 
-.weathercard__time{
-    color: white;
-    margin: 0;
-    margin: 0 0 0 16px;
+.weathercard__wrapper {
+  position: absolute;
 }
 
-.weathercard__container{
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    height: 100%;
+.weathercard__hiandlow {
+  position: relative;
+  left: 100px;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
 }
 
-.weathercard__container__leftmost{
-    flex-direction: column;
-    height: 100%;
-    gap: 0px;
-    justify-content: center;
+.weathercard__icon {
+  bottom: 16px;
+  height: 100%;
+  border-radius: 10px;
 }
 
-.weathercard__information{
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+@media (max-width: 470px) {
+  .weathercard__temp {
+    margin: 0 0 0 3px;
+  }
+  .weathercard__time {
+    margin: 0 0 0 3px;
+  }
 }
 
-.weathercard__stat{
-    color: white;
-    margin: 0;
-    font-size: 13px;
-    opacity: 60%;
-}
-
-.weathercard__wrapper{
-    position: absolute;
-}
-
-.weathercard__hiandlow{
+@media (max-width: 455px) {
+  .weathercard__information{
     position: relative;
-    left: 100px;
-    color: rgba(255, 255, 255, 0.7);
-    font-weight: 500;
-}
+  }
 
-.weathercard__icon{
-    bottom: 16px;
-    height: 100%;
-    border-radius: 10px;
+  .weathercard__stat{
+    position: absolute;
+  }
 }

@@ -10,11 +10,10 @@ import { NavLink } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentThemeContext } from "../../contexts/CurrentThemeContext";
+import { MOBILE_WIDTH, WINDOW_WIDTH } from "../../utils/constants";
 const { flag } = require("country-emoji");
 
 //when the menu is actually open for the modal we can mount it and make it's z index on top
-
-const width = window.screen.width;
 
 function Header(props) {
   const [isMobileMenuOpened, toggleMobileMenu] = useState(false);
@@ -47,7 +46,7 @@ function Header(props) {
   }
 
   useEffect(() => {
-    if (width < 710) {
+    if (WINDOW_WIDTH < MOBILE_WIDTH) {
       toggleMobileMenu(true);
     }
   }, []);

@@ -196,9 +196,9 @@ const defaultClothingItems = [
 
 const apiKey = "bb1a34b30e91f6493febc3872715ffc5";
 const newApiKey = "30f7c7b473a0459bacc175749242208";
-
+const MOBILE_WIDTH = 710;
 const baseUrl = "http://api.weatherapi.com/v1/";
-
+const WINDOW_WIDTH = window.screen.width;
 const _processServerResponse = (res) => {
   if (res.ok) {
     return res.json();
@@ -206,11 +206,14 @@ const _processServerResponse = (res) => {
   return Promise.reject(`Error: ${res.status}`);
 };
 
+
 export {
   apiKey,
   newApiKey,
   backgrounds,
   _processServerResponse,
   defaultClothingItems,
-  baseUrl
+  baseUrl,
+  MOBILE_WIDTH,
+  WINDOW_WIDTH
 };
