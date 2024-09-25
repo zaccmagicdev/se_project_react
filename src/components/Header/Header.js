@@ -11,7 +11,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { CurrentThemeContext } from "../../contexts/CurrentThemeContext";
 import { MOBILE_WIDTH, WINDOW_WIDTH } from "../../utils/constants";
-const { flag } = require("country-emoji");
+const { flag, code } = require("country-emoji");
 
 //when the menu is actually open for the modal we can mount it and make it's z index on top
 
@@ -86,6 +86,17 @@ function Header(props) {
             toggleModalMenu(true);
           }}
         ></button>
+         <div className="header__info-container">
+            <p className="header__date-time">{props.date}</p>
+            <div className="header__container">
+              <p className="header__date-time">
+                {props.location !== ""
+                  ? `${props.location}, ${props.region}, ${code(props.country)}`
+                  : ""}
+              </p>
+              <span>{flag(props.country)}</span>
+            </div>
+          </div>
         {mobileModalOpened && (
           <div className="header__mobile-menu">
             <button
