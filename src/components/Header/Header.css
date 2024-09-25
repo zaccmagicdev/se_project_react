@@ -110,6 +110,7 @@
   padding: 11px;
   box-sizing: border-box;
   top: 9px;
+  z-index: 999;
 }
 
 .header__mobile-menu-close-btn {

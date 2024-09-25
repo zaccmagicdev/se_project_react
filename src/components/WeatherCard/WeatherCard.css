@@ -35,19 +35,21 @@
   height: 100%;
   gap: 0px;
   justify-content: center;
+  position: absolute;
 }
 
 .weathercard__information {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  position: absolute;
+  left: 144px;
 }
 
 .weathercard__stat {
-  color: white;
+  color: rgb(44, 44, 44);
   margin: 0;
   font-size: 13px;
-  opacity: 60%;
 }
 
 
@@ -68,21 +70,18 @@
   border-radius: 10px;
 }
 
+@media(min-width: 1450px){
+  .weathercard__information{
+    position: relative;
+    left: 101px;
+  }
+}
+
 @media (max-width: 470px) {
   .weathercard__temp {
     margin: 0 0 0 3px;
   }
   .weathercard__time {
     margin: 0 0 0 3px;
-  }
-}
-
-@media (max-width: 455px) {
-  .weathercard__information{
-    position: relative;
-  }
-
-  .weathercard__stat{
-    position: absolute;
   }
 }
