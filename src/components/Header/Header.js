@@ -52,7 +52,7 @@ function Header(props) {
   }, []);
 
   function handleCloseMobileModal() {
-    props.handleClick();
+    props.handleGarmentClick();
     toggleModalMenu(false);
   }
 

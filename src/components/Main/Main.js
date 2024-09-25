@@ -48,7 +48,7 @@ function Main(props) {
         windDir={props.windDir}
         windMph={props.windMph}
       />
-      <p>It is currently {unitTempInfo}, you may want to wear:</p>
+      <p className="main__suggestion">It is currently {unitTempInfo}, you may want to wear:</p>
       {props.cards !== null && (
         <ul>
           {filteredCards.map((item, i) => (

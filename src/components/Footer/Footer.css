@@ -10,3 +10,9 @@
         margin-top: 90px;
     }
 }
+
+@media(max-width: 360px){
+    .footer__container > p{
+        font-size: 13px;
+    }
+}
