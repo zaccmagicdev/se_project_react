@@ -19,6 +19,8 @@ PROTOTYPE RELEASED!: This is a demo for the new version of this project which is
 errors on that and I still want to make the UI better as it was challenging fitting information down to 320px
 
 Demonstration(s):
+![Mobile Demo](https://github.com/user-attachments/assets/359e5fdd-36ee-4796-8de1-63b9f8922f49)
+![Fullsize Demo](https://github.com/user-attachments/assets/5cd8787d-090c-43fb-a588-475f70d3dfbb)
 
 
 ## Technologies Used:
