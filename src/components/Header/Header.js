@@ -59,35 +59,61 @@ function Header(props) {
   if (isMobileMenuOpened) {
     return (
       <header className="header">
-         <NavLink exact to="/">
-            <img
-              className="header__button"
-              src={headerLogo}
-              alt="What to Wear?"
-            />
-          </NavLink>
-          <ToggleSwitch
-              className="header__toggleswitch__temp"
-              label="Celcius?"
-              handleCallback={handleWeatherSwitchChange}
-              icon1Link={cIcon}
-              icon2Link={fIcon}
-            />
+        <div className="header__mobile-section">
+          <NavLink exact to="/">
+              <img
+                className="header__button"
+                src={headerLogo}
+                alt="What to Wear?"
+              />
+            </NavLink>
             <ToggleSwitch
-              className="header__toggleswitch__theme"
-              label="Dark?"
-              handleCallback={handleColorThemeChange}
-              icon1Link={moonIcon}
-              icon2Link={sunIcon}
-            />
-        <button
-          className={`header__button header__mobile-button header__mobile-button_${theme}`}
-          onClick={() => {
-            toggleModalMenu(true);
-          }}
-        ></button>
-         <div className="header__info-container">
-            <p className="header__date-time">{props.date}</p>
+                className="header__toggleswitch__temp"
+                label="Celcius?"
+                handleCallback={handleWeatherSwitchChange}
+                icon1Link={cIcon}
+                icon2Link={fIcon}
+              />
+              <ToggleSwitch
+                className="header__toggleswitch__theme"
+                label="Dark?"
+                handleCallback={handleColorThemeChange}
+                icon1Link={moonIcon}
+                icon2Link={sunIcon}
+              />
+          <button
+            className={`header__button header__mobile-button header__mobile-button_${theme}`}
+            onClick={() => {
+              toggleModalMenu(true);
+            }}
+          ></button>
+          {mobileModalOpened && (
+            <div className="header__mobile-menu">
+              <button
+                className="header__mobile-menu-close-btn"
+                onClick={() => {
+                  toggleModalMenu(false);
+                }}
+              ></button>
+              <div className="header__mobile-container">
+              <NavLink exact to="/profile">
+                <p className="header__button header__username">
+                  {currentUser === null ? "Loading..." : currentUser.name}
+                </p>
+              </NavLink>
+                <button
+                  className="header__button header__add-items-bttn"
+                  onClick={handleCloseMobileModal}
+                >
+                  + Add clothes
+                </button>
+              </div>
+            </div>
+          )}
+          </div>
+          <div className="header__mobile-section">
+          <div className="header__info-container">
+            <p className="header__date-time">{props.dateShortened}</p>
             <div className="header__container">
               <p className="header__date-time">
                 {props.location !== ""
@@ -97,30 +123,7 @@ function Header(props) {
               <span>{flag(props.country)}</span>
             </div>
           </div>
-        {mobileModalOpened && (
-          <div className="header__mobile-menu">
-            <button
-              className="header__mobile-menu-close-btn"
-              onClick={() => {
-                toggleModalMenu(false);
-              }}
-            ></button>
-            <div className="header__mobile-container">
-            <NavLink exact to="/profile">
-              <p className="header__button header__username">
-                {currentUser === null ? "Loading..." : currentUser.name}
-              </p>
-            </NavLink>
-            {profilePic}
-              <button
-                className="header__button header__add-items-bttn"
-                onClick={handleCloseMobileModal}
-              >
-                + Add clothes
-              </button>
-            </div>
           </div>
-        )}
       </header>
     );
   } else {

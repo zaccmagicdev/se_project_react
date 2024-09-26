@@ -285,6 +285,7 @@ function App() {
                   month: "long",
                   day: "numeric",
                 })}
+                dateShortened={currentDate.toLocaleDateString("en-us")}
                 location={city}
                 region={region}
                 country={country}

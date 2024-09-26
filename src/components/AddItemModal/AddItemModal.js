@@ -28,6 +28,7 @@ function AddItemModal(props){
 
     return(
         <ModalWithForm title="New Garment" name="clothing" buttonName="Add garment" onClose={props.handleCloseModal} handleSubmit={handleSubmit}>
+            <span style={{color: 'red', fontSize: '12px'}}>WARNING: This currently does not work currently as the back-end is being worked on :(</span>
         <label>
             Name
             <input className="clothing__modal-input" placeholder='Name' type="text" onChange={handleNameChange} value={inputValueName}></input>

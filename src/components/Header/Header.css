@@ -96,6 +96,14 @@
   background-color: #f3f3f3;
 }
 
+.header__mobile-section{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .header__mobile-menu {
   width: 95%;
   height: 181px;
@@ -144,6 +152,19 @@
 
 @media(max-width: 710px){
   .header{
-    margin-bottom: 10px;
+    margin-bottom: 50px;
+    flex-direction: column;
+  }
+
+  .header__info-container{
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3px;
+    width: 100%;
+  }
+
+  .header__info-container > div > p, .header__info-container > p{
+    font-size: 14px;
   }
 }

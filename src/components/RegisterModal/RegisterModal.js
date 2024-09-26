@@ -36,6 +36,7 @@ function RegisterModal(props) {
 
     return (
         <ModalWithForm title="Sign up" name='registration' buttonName="Next" onClose={props.handleCloseModal} handleSubmit={handleSubmit}>
+              <span style={{color: 'red', fontSize: '12px'}}>WARNING: This currently does not work currently as the back-end is being worked on :(</span>
             <label className={`registration__modal-label  registration__modal-label_${theme}`}>
                 Email*
                 <input style={{borderColor: color}} className="registration__modal-input" placeholder='Email' type="email" onChange={handleEmailChange} required value={inputValEmail}/>

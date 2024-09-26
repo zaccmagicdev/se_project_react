@@ -31,6 +31,7 @@ function LoginModal(props) {
                 <input style={{borderColor: color}} 
                 className="login__modal-input" placeholder='Email' type="email" onChange={handleEmailChange} required value={inputValEmail} />
             </label>
+            <span style={{color: 'red', fontSize: '12px'}}>WARNING: This currently does not work currently as the back-end is being worked on :(</span>
             <label className={`login__modal-label  login__modal-label_${theme}`}>
                 Password*
                 <input style={{borderColor: color}} 

@@ -34,7 +34,7 @@
 
 .searchbar__input_bad-search{
     border: 2px solid red;
-    background-color: rgba(255, 0, 0, 0.1);
+    background-color: rgba(255, 0, 0, 0.6);
 }
 
 .searchbar__submit{
