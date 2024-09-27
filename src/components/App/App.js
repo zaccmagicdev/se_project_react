@@ -295,7 +295,7 @@ function App() {
                 loggedIn={isLoggedIn}
               />
               <Switch>
-                <Route exact path="/search">
+                <Route exact path="/home">
                   <SearchBar errMessage={err} onData={handleSearchSubmit} />
                   {searchMade && (
                     <Main
