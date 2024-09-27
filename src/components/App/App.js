@@ -131,7 +131,6 @@ function App() {
         api
           .checkToken(localStorage.getItem("jwt"))
           .then((res) => {
-            console.log(res);
             setCurrentUser(res.data);
             handleCloseModal();
             setLogIn(true);
@@ -146,7 +145,6 @@ function App() {
     api
       .updateInfo(name, avatar, localStorage.getItem("jwt"))
       .then((res) => {
-        console.log(res);
         setCurrentUser(res);
       })
       .then(() => {
@@ -189,7 +187,6 @@ function App() {
     newWeatherAPI(data)
       .then((res) => {
         setSearchResult(res);
-        console.log(res)
       })
       .then(() => {
         err !== '' && (setErr(''))
@@ -295,7 +292,7 @@ function App() {
                 loggedIn={isLoggedIn}
               />
               <Switch>
-                <Route exact path="/home">
+                <Route exact path="/">
                   <SearchBar errMessage={err} onData={handleSearchSubmit} />
                   {searchMade && (
                     <Main
