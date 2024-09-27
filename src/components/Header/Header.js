@@ -60,7 +60,7 @@ function Header(props) {
     return (
       <header className="header">
         <div className="header__mobile-section">
-          <NavLink exact to="/">
+          <NavLink exact to="/search">
               <img
                 className="header__button"
                 src={headerLogo}
@@ -130,7 +130,7 @@ function Header(props) {
     return (
       <header className="header">
         <div className="header__container">
-          <NavLink exact to="/">
+          <NavLink exact to="/search">
             <img
               className="header__button"
               src={headerLogo}
