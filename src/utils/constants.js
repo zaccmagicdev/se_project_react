@@ -18,6 +18,12 @@ const backgrounds = [
     color: "rgba(0, 163, 255, 1)",
   },
   {
+    url: require("../images/Uniontest.svg").default,
+    timeOfDay: "day",
+    weather: "Partly Cloudy",
+    color: "rgba(0, 163, 255, 1)",
+  },
+  {
     url: require("../images/Group 148.svg").default,
     timeOfDay: "day",
     weather: "Cloudy",
@@ -101,6 +107,12 @@ const backgrounds = [
     url: require("../images/Uniontestnight.svg").default,
     timeOfDay: "night",
     weather: "Overcast",
+    color: "rgba(40, 104, 151, 1)",
+  },
+  {
+    url: require("../images/Uniontestnight.svg").default,
+    timeOfDay: "night",
+    weather: "Partly Cloudy",
     color: "rgba(40, 104, 151, 1)",
   },
   {

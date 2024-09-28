@@ -234,6 +234,7 @@ function App() {
       setHumidity(searchResult.current.humidity)
       setWind_dir(searchResult.current.wind_dir)
       setWind_mph(searchResult.current.wind_mph)
+      console.log(searchResult)
     }
   }, [searchResult]);
 
