@@ -6,14 +6,13 @@
 
 body{
     margin: 0;
+    padding: 1px;
 }
 
 * {
   font-family: "Cabinet Grotesk", Arial, sans-serif;
   line-height: 1.2;
 }
-
-
 
 a {
   text-decoration: none;
@@ -70,8 +69,8 @@ p {
   color: black;
 }
 
-@media(max-width: 705px){
+/*@media(max-width: 705px){
   .App{
     height: 100%;
   }
-}
+}*/
