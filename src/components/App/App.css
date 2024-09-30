@@ -69,3 +69,9 @@ p {
 .clothing__modal-radio-btn:checked + span {
   color: black;
 }
+
+@media(max-width: 705px){
+  .App{
+    height: 100%;
+  }
+}

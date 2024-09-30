@@ -154,7 +154,7 @@ const backgrounds = [
   {
     url: require("../images/Group 148.svg").default,
     timeOfDay: "night",
-    weather: "fog",
+    weather: "Fog",
     color: "rgba(40, 104, 151, 1)",
   },
 ];
